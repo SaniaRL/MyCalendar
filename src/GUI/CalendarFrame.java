@@ -3,6 +3,7 @@ package GUI;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.util.Calendar;
 
 public class CalendarFrame extends JFrame {
 
@@ -12,6 +13,9 @@ public class CalendarFrame extends JFrame {
 
     //Paths
     private final ImageIcon icon;
+
+    private int currentMonth;
+    private int currentYear;
 
     //TODO Remove Main
     public static void main(String[] args){
@@ -23,6 +27,9 @@ public class CalendarFrame extends JFrame {
         centerPanel = new JPanel();
         icon = new ImageIcon("Icons/calendarIcon.png");
         buildFrame();
+
+        currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+        currentYear = Calendar.getInstance().get(Calendar.YEAR);
     }
 
     private void buildFrame(){
@@ -34,15 +41,24 @@ public class CalendarFrame extends JFrame {
         setIconImage(icon.getImage());
         setVisible(true);
 
+        buildNorthPanel();
+        add(northPanel, BorderLayout.NORTH);
+
         buildCenterPanel();
         add(centerPanel, BorderLayout.CENTER);
     }
 
     public void buildNorthPanel(){
-
+        northPanel.setLayout(new GridLayout(2, 1));
+        JLabel monthLabel = new JLabel(String.valueOf(currentMonth), SwingConstants.CENTER);
+        JLabel yearLabel = new JLabel(String.valueOf(currentYear), SwingConstants.CENTER);
+        northPanel.add(yearLabel, SwingConstants.CENTER);
+        northPanel.add(monthLabel, SwingConstants.CENTER);
     }
+
     public void buildCenterPanel(){
         centerPanel.setLayout(new GridLayout(5, 7));
+        centerPanel.setBorder(new LineBorder(Color.BLACK, 4));
         buildDays(centerPanel, 35);
     }
 
