@@ -15,6 +15,7 @@ import java.util.List;
 public class CalendarFrame extends JFrame {
 
     //Panels
+    private final JPanel contentPanel;
     private final JPanel northPanel;
     private final JPanel centerPanel;
     private final JPanel eastPanel;
@@ -43,6 +44,8 @@ public class CalendarFrame extends JFrame {
     }
 
     public CalendarFrame(){
+
+        contentPanel = new JPanel();
         northPanel = new JPanel();
         centerPanel = new JPanel();
         eastPanel = new JPanel();
@@ -61,22 +64,28 @@ public class CalendarFrame extends JFrame {
         currentYear = Calendar.getInstance().get(Calendar.YEAR);
     }
 
+
+
     private void buildFrame(){
         setSize(new Dimension(1000, 600));
-        setLayout(new BorderLayout());
+//        setLayout(new BorderLayout());
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("MyCalendar");
         setIconImage(icon.getImage());
 
+        contentPanel.setLayout(new BorderLayout());
+        contentPanel.setVisible(true);
+
         buildNorthPanel();
-        add(northPanel, BorderLayout.NORTH);
+        contentPanel.add(northPanel, BorderLayout.NORTH);
 
         buildCenterPanel();
-        add(centerPanel, BorderLayout.CENTER);
+        contentPanel.add(centerPanel, BorderLayout.CENTER);
 
         buildSidePanels();
 
+        add(contentPanel);
         setVisible(true);
     }
 
@@ -119,7 +128,7 @@ public class CalendarFrame extends JFrame {
         weekDayPanel.add(emptyPanel2, BorderLayout.EAST);
         weekDayPanel.add(weekDays, BorderLayout.CENTER);
         northPanel.add(weekDayPanel);
-        add(northPanel, BorderLayout.NORTH);
+        contentPanel.add(northPanel, BorderLayout.NORTH);
     }
 
     public void buildCenterPanel(){
@@ -144,11 +153,11 @@ public class CalendarFrame extends JFrame {
 
         buildChangeMonthButton(nextMonth, 1);
         eastPanel.add(nextMonth);
-        add(eastPanel, BorderLayout.EAST);
+        contentPanel.add(eastPanel, BorderLayout.EAST);
 
         buildChangeMonthButton(previousMonth, -1);
         westPanel.add(previousMonth);
-        add(westPanel, BorderLayout.WEST);
+        contentPanel.add(westPanel, BorderLayout.WEST);
     }
 
     public void buildChangeMonthButton(JButton button, int i){
