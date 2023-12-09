@@ -12,20 +12,15 @@ public class ColorSettings {
     private Color emptyBackgroundColor;
     private Color emptyForegroundColor;
     private Color borderColor;
-    private String path;
-    private Image background = new ImageIcon().getImage();
-
 
     public ColorSettings(){
-        color = Color.BLACK;
+        color = Color.white;
         weekdayBackgroundColor = Color.WHITE;
         weekdayForegroundColor = Color.BLACK;
         weekendBackgroundColor = new Color(255, 166, 166);
         weekendForegroundColor = new Color(233, 30, 30);
         emptyBackgroundColor = Color.lightGray;
         emptyForegroundColor = Color.gray;
-        path = "Backgrounds/blackBackground.png";
-
         borderColor = Color.gray;
     }
 
@@ -67,5 +62,9 @@ public class ColorSettings {
 
     public Color getBorderColor() {
         return borderColor;
+    }
+
+    public Color getColor() {
+        return color;
     }
 }
