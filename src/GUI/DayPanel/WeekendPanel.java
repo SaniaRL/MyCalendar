@@ -1,6 +1,18 @@
 package GUI.DayPanel;
 
-import javax.swing.*;
+import java.awt.*;
+import java.time.LocalDate;
 
-public class WeekendPanel extends JPanel implements DayPanel {
+public class WeekendPanel extends DayPanel {
+
+    public WeekendPanel(LocalDate date){
+        super(date);
+        addDetails();
+    }
+
+    public void addDetails(){
+        setBackground(color.getWeekendBackgroundColor());
+        dateLabel.setForeground(color.getWeekendForegroundColor());
+    }
+
 }
