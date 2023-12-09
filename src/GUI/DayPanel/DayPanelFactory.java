@@ -1,11 +1,22 @@
 package GUI.DayPanel;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+
 public class DayPanelFactory {
-    public DayPanel createDayPanel(DayVariations dayType){
-        return switch (dayType){
-            case EMPTY -> new EmptyPanel();
-            case WEEKDAY -> new WeekDayPanel();
-            case WEEKEND -> new WeekendPanel();
-        };
+    public DayPanel createDayPanel(boolean currentMonth, LocalDate date){
+        if(!currentMonth){
+            return new OutsideMonthPanel(date);
+        }
+        else if(isWeekend(date)){
+            return new WeekendPanel(date);
+        }
+        else{
+            return new WeekDayPanel(date);
+        }
+    }
+
+    public boolean isWeekend(LocalDate date){
+        return date.getDayOfWeek() == DayOfWeek.SUNDAY;
     }
 }
