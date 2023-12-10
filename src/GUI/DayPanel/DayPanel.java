@@ -39,7 +39,5 @@ public abstract class DayPanel extends JPanel {
         topPanel.setOpaque(false);
         dateLabel.setOpaque(false);
         add(topPanel);
-//        topPanel.setVisible(true);
-
     }
 }

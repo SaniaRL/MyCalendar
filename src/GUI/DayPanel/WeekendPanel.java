@@ -14,5 +14,4 @@ public class WeekendPanel extends DayPanel {
         setBackground(color.getWeekendBackgroundColor());
         dateLabel.setForeground(color.getWeekendForegroundColor());
     }
-
 }
