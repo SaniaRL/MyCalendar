@@ -14,6 +14,5 @@ public class WeekDayPanel extends DayPanel {
     public void addDetails(){
         setBackground(color.getWeekdayBackgroundColor());
         dateLabel.setForeground(color.getWeekdayForegroundColor());
-
     }
 }

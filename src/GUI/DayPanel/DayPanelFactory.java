@@ -8,6 +8,9 @@ public class DayPanelFactory {
         if(!currentMonth){
             return new OutsideMonthPanel(date);
         }
+        else if(date.equals(LocalDate.now())){
+            return new TodayPanel(date);
+        }
         else if(isWeekend(date)){
             return new WeekendPanel(date);
         }
