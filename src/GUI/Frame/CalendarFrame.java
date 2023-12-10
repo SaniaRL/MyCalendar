@@ -34,6 +34,8 @@ public class CalendarFrame extends JFrame {
 
     LocalDate date;
 
+    Menu menu;
+
     //Paths
     private final ImageIcon icon;
     private ColorSettings colorSettings;
@@ -49,6 +51,8 @@ public class CalendarFrame extends JFrame {
         colorSettings = new ColorSettings();
         date = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 1);
 
+
+        menu = new Menu();
 
         colorSettings = new ColorSettings();
         contentPanel = new JPanel();
@@ -90,6 +94,9 @@ public class CalendarFrame extends JFrame {
 
         buildSidePanels();
         buildSouthPanel();
+
+        setJMenuBar(menu);
+        addActionListenersToMenu();
 
         add(contentPanel);
         setVisible(true);
@@ -221,6 +228,34 @@ public class CalendarFrame extends JFrame {
 
         monthLabel.setText(String.valueOf(date.getMonth()));
         yearLabel.setText(String.valueOf(date.getYear()));
+        repaint();
+        revalidate();
+    }
+
+    public void addActionListenersToMenu(){
+        menu.grey.addActionListener(e -> {
+            colorSettings.setDefaultColorScheme();
+            resetColor();
+        });
+        menu.green.addActionListener(e -> {
+            colorSettings.setGreenColorScheme();
+            resetColor();
+        });
+        menu.pink.addActionListener(e -> {
+            colorSettings.setPinkColorScheme();
+            resetColor();
+        });
+        menu.ugly.addActionListener(e -> {
+            colorSettings.setUglyColorScheme();
+            resetColor();
+        });
+    }
+
+    public void resetColor(){
+        monthView.setColorSettings(colorSettings);
+        northPanel.removeAll();
+        southPanel.removeAll();
+        buildFrame();
         repaint();
         revalidate();
     }

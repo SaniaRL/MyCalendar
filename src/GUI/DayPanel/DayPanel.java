@@ -15,11 +15,11 @@ public abstract class DayPanel extends JPanel {
     protected DayOfMonth dayOfMonth;
     protected ColorSettings color;
 
-    protected DayPanel(LocalDate date){
+    protected DayPanel(LocalDate date, ColorSettings colorSettings){
         this.date = date;
         dateLabel = new JLabel(" " + String.valueOf(date.getDayOfMonth()));
         dayOfMonth = new DayOfMonth(date);
-        color = new ColorSettings();
+        color = colorSettings;
         buildPanel();
     }
 

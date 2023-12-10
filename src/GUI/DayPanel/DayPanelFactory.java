@@ -1,21 +1,23 @@
 package GUI.DayPanel;
 
+import GUI.ColorSettings;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class DayPanelFactory {
-    public DayPanel createDayPanel(boolean currentMonth, LocalDate date){
+    public DayPanel createDayPanel(boolean currentMonth, LocalDate date, ColorSettings colorSettings){
         if(!currentMonth){
-            return new OutsideMonthPanel(date);
+            return new OutsideMonthPanel(date, colorSettings);
         }
         else if(date.equals(LocalDate.now())){
-            return new TodayPanel(date);
+            return new TodayPanel(date, colorSettings);
         }
         else if(isWeekend(date)){
-            return new WeekendPanel(date);
+            return new WeekendPanel(date, colorSettings);
         }
         else{
-            return new WeekDayPanel(date);
+            return new WeekDayPanel(date, colorSettings);
         }
     }
 

@@ -43,13 +43,14 @@ public class MonthView extends JPanel implements CalendarStrategy {
         List<LocalDate> localDateList = dayOfMonth.getDateList();
         for(LocalDate localDate : localDateList){
             boolean currentMonth = localDate.getMonth().equals(date.getMonth());
-            DayPanel dayPanel = dayPanelFactory.createDayPanel(currentMonth, localDate);
+            DayPanel dayPanel = dayPanelFactory.createDayPanel(currentMonth, localDate, colorSettings);
             add(dayPanel);
         }
     }
 
     public void setColorSettings(ColorSettings colorSettings) {
         this.colorSettings = colorSettings;
+        buildDays();
     }
 
     public void setDate(LocalDate date) {
