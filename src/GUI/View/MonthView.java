@@ -11,7 +11,7 @@ import java.awt.*;
 import java.time.LocalDate;
 import java.util.List;
 
-public class MonthView extends JPanel implements CalenderStrategy {
+public class MonthView extends JPanel implements CalendarStrategy {
 
     ColorSettings colorSettings;
     LocalDate date;
@@ -21,7 +21,19 @@ public class MonthView extends JPanel implements CalenderStrategy {
 
         setLayout(new GridLayout(6, 7));
         setBorder(new LineBorder(colorSettings.getBorderColor(), 2));
+        createView();
+    }
+
+    @Override
+    public void createView(){
         buildDays();
+    }
+
+    @Override
+    public void changeDetails(){
+        buildDays();
+        repaint();
+        revalidate();
     }
 
     public void buildDays(){
@@ -35,12 +47,12 @@ public class MonthView extends JPanel implements CalenderStrategy {
             add(dayPanel);
         }
     }
-    public void changeMonthDetails(){
-        buildDays();
 
-//        monthLabel.setText(String.valueOf(date.getMonth()));
-//        yearLabel.setText(String.valueOf(date.getYear()));
-        repaint();
-        revalidate();
+    public void setColorSettings(ColorSettings colorSettings) {
+        this.colorSettings = colorSettings;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

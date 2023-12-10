@@ -16,7 +16,7 @@ public class ColorSettings {
     private Color borderColor;
 
     public ColorSettings(){
-        setGreenColorScheme();
+        setDefaultColorScheme();
     }
 
     public void setColorScheme(String color){
@@ -50,7 +50,7 @@ public class ColorSettings {
         weekendBackgroundColor = new Color(33, 130, 30);
         weekendForegroundColor = new Color(13, 55, 13);
         emptyBackgroundColor = new Color(120, 200, 120);
-        emptyForegroundColor = new Color(130, 190, 130);
+        emptyForegroundColor = new Color(90, 150, 90);
         borderColor = new Color(10, 35, 10);
     }
 
