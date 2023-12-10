@@ -1,2 +1,4 @@
-package GUI.Post;public class Note {
+package GUI.Post;
+
+public class Note {
 }

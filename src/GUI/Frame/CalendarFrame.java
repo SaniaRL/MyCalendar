@@ -4,6 +4,7 @@ import GUI.ColorSettings;
 import GUI.DayOfMonth;
 import GUI.DayPanel.DayPanel;
 import GUI.DayPanel.DayPanelFactory;
+import GUI.View.MonthView;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -16,9 +17,10 @@ public class CalendarFrame extends JFrame {
 
     //Panels
     private final JPanel northPanel;
-    private final JPanel centerPanel;
+//    private final JPanel centerPanel;
     private final JPanel eastPanel;
     private final JPanel westPanel;
+    MonthView monthView;
 
     //Labels
     JLabel monthLabel;
@@ -43,18 +45,20 @@ public class CalendarFrame extends JFrame {
     }
 
     public CalendarFrame(){
+        colorSettings = new ColorSettings();
+        date = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 1);
+
         northPanel = new JPanel();
-        centerPanel = new JPanel();
+//        centerPanel = new JPanel();
+        monthView = new MonthView(colorSettings, date);
         eastPanel = new JPanel();
         westPanel = new JPanel();
 
         nextMonth = new JButton(">>");
         previousMonth = new JButton("<<");
 
-        date = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 1);
 
         icon = new ImageIcon("Icons/calendarIcon.png");
-        colorSettings = new ColorSettings();
         buildFrame();
 
         currentMonth = Calendar.getInstance().get(Calendar.MONTH);
@@ -72,8 +76,9 @@ public class CalendarFrame extends JFrame {
         buildNorthPanel();
         add(northPanel, BorderLayout.NORTH);
 
-        buildCenterPanel();
-        add(centerPanel, BorderLayout.CENTER);
+//        buildCenterPanel();
+        add(monthView, BorderLayout.CENTER);
+//        add(centerPanel, BorderLayout.CENTER);
 
         buildSidePanels();
 
@@ -122,11 +127,14 @@ public class CalendarFrame extends JFrame {
         add(northPanel, BorderLayout.NORTH);
     }
 
+    /*
     public void buildCenterPanel(){
         centerPanel.setLayout(new GridLayout(6, 7));
         centerPanel.setBorder(new LineBorder(colorSettings.getBorderColor(), 2));
         buildDays();
     }
+
+
 
     public void buildDays(){
         centerPanel.removeAll();
@@ -139,6 +147,8 @@ public class CalendarFrame extends JFrame {
             centerPanel.add(dayPanel);
         }
     }
+
+     */
 
     public void buildSidePanels(){
 
@@ -165,7 +175,9 @@ public class CalendarFrame extends JFrame {
     }
 
     public void changeMonthDetails(){
-        buildDays();
+//        buildDays();
+
+
 
         monthLabel.setText(String.valueOf(date.getMonth()));
         yearLabel.setText(String.valueOf(date.getYear()));
