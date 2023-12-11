@@ -55,16 +55,16 @@ public class ColorSettings {
     }
 
     public void setPinkColorScheme(){
-        color = Color.white;
-        todayBackgroundColor = new Color(100, 255, 100);
-        todayForegroundColor = new Color(0, 40, 0);
-        weekdayBackgroundColor = Color.CYAN;
-        weekdayForegroundColor = Color.pink;
-        weekendBackgroundColor = new Color(145, 16, 166);
-        weekendForegroundColor = new Color(33, 130, 30);
-        emptyBackgroundColor = Color.yellow;
-        emptyForegroundColor = Color.blue;
-        borderColor = Color.orange;
+        color = new Color(255, 230, 250);
+        todayBackgroundColor = new Color(220, 120, 180);
+        todayForegroundColor = new Color(150, 30, 90);
+        weekdayBackgroundColor = new Color(255, 200, 240);
+        weekdayForegroundColor = new Color(170, 40, 100);
+        weekendBackgroundColor = new Color(150, 50, 100);
+        weekendForegroundColor = new Color(70, 10, 30);
+        emptyBackgroundColor = new Color(255, 170, 220);
+        emptyForegroundColor = new Color(230, 170, 220);
+        borderColor = new Color(150, 30, 90);
     }
 
     public void setUglyColorScheme(){

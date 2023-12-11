@@ -19,6 +19,8 @@ public class CalendarFrame extends JFrame {
     private final JPanel eastPanel;
     private final JPanel westPanel;
     private final JPanel southPanel;
+
+    //Views
     MonthView monthView;
     DayView dayView;
 
@@ -32,8 +34,10 @@ public class CalendarFrame extends JFrame {
     private final JButton newPost;
     private final JButton account;
 
+    //Dates
     LocalDate date;
 
+    //Menus
     Menu menu;
 
     //Paths
@@ -50,10 +54,7 @@ public class CalendarFrame extends JFrame {
     public CalendarFrame(){
         colorSettings = new ColorSettings();
         date = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 1);
-
-
         menu = new Menu();
-
         colorSettings = new ColorSettings();
         contentPanel = new JPanel();
         northPanel = new JPanel();
@@ -62,14 +63,12 @@ public class CalendarFrame extends JFrame {
         eastPanel = new JPanel();
         westPanel = new JPanel();
         southPanel = new JPanel();
-
         nextMonth = new JButton(">>");
         previousMonth = new JButton("<<");
         newPost = new JButton();
         account = new JButton();
-
-
         icon = new ImageIcon("Icons/calendarIcon.png");
+
         buildFrame();
     }
 
@@ -87,14 +86,17 @@ public class CalendarFrame extends JFrame {
         contentPanel.setOpaque(true);
         contentPanel.setVisible(true);
 
+        //Build panels
         buildNorthPanel();
         contentPanel.add(northPanel, BorderLayout.NORTH);
-        contentPanel.add(monthView, BorderLayout.CENTER);
-//        contentPanel.add(dayView, BorderLayout.CENTER);
-
         buildSidePanels();
         buildSouthPanel();
 
+        //Add views
+        contentPanel.add(monthView, BorderLayout.CENTER);
+//        contentPanel.add(dayView, BorderLayout.CENTER);
+
+        //Add menu & Set action Listener to menu
         setJMenuBar(menu);
         addActionListenersToMenu();
 
@@ -121,11 +123,10 @@ public class CalendarFrame extends JFrame {
         topPanel.add(middlePanel);
         topPanel.add(rightPanel);
 
-
-        buildNorthPanelButtons(newPost, new ImageIcon("Icons/new.png"));
-        buildNorthPanelButtons(account, new ImageIcon("Icons/account.png"));
-
-//        leftPanel.add(newPost);
+        //Build buttons for new post and account and add
+        buildNorthPanelButtons(newPost, "+");
+        buildNorthPanelButtons(account,"Icons/account.png");
+        leftPanel.add(newPost);
 //        rightPanel.add(account);
 
         Border emptyTopBorder = BorderFactory.createEmptyBorder(10, 0,0,0);
@@ -146,10 +147,11 @@ public class CalendarFrame extends JFrame {
         buildWeekPanel();
     }
 
-    public void buildNorthPanelButtons(JButton button, ImageIcon imageIcon){
-        button.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+    public void buildNorthPanelButtons(JButton button, String text){
+        button.setText(text);
+//        button.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         button.setBackground(colorSettings.getBorderColor());
-        button.setPreferredSize(new Dimension(40,40));
+        button.setPreferredSize(new Dimension(50,50));
     }
 
     public void buildWeekPanel(){
