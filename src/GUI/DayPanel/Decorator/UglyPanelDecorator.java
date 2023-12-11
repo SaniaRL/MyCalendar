@@ -9,6 +9,7 @@ public class UglyPanelDecorator extends DayPanelDecorator {
 
     public UglyPanelDecorator(DayPanel dayPanel){
         super(dayPanel);
+        setColor();
     }
 
     @Override

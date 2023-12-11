@@ -10,6 +10,7 @@ public class PinkPanelDecorator extends DayPanelDecorator {
 
     public PinkPanelDecorator(DayPanel dayPanel){
         super(dayPanel);
+        setColor();
     }
 
     @Override

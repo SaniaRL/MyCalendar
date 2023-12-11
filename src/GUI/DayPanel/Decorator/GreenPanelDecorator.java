@@ -10,11 +10,12 @@ public class GreenPanelDecorator extends DefaultPanelDecorator {
 
     public GreenPanelDecorator(DayPanel dayPanel){
         super(dayPanel);
+        setColor();
     }
 
     @Override
     public void setColor(){
-        dayPanel.setBackground(new Color(170, 255, 170));
+        dayPanel.setBackground(new Color(80, 255, 80));
         dayPanel.setBorder(new LineBorder(new Color(10, 200, 10)));
     }
 }

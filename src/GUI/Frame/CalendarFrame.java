@@ -1,6 +1,8 @@
 package GUI.Frame;
 
 import GUI.ColorSettings;
+import GUI.DayPanel.DayPanel;
+import GUI.DayPanel.Decorator.*;
 import GUI.View.*;
 
 import javax.swing.*;
@@ -9,7 +11,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.time.LocalDate;
 
-public class CalendarFrame extends JFrame {
+public class CalendarFrame extends JFrame implements MonthViewParent {
 
     //Panels
     private final JPanel contentPanel;
@@ -44,7 +46,8 @@ public class CalendarFrame extends JFrame {
     private final ImageIcon icon;
     private ColorSettings colorSettings;
 
-    MonthViewParent monthViewParent;
+    DayPanel clickedPanel;
+    DayPanelDecorator dayPanelDecorator;
 
 
     //TODO Remove Main
@@ -61,7 +64,7 @@ public class CalendarFrame extends JFrame {
         contentPanel = new JPanel();
         northPanel = new JPanel();
         //I want to use method Update GUI here it there is a call back
-        monthView = new MonthView(colorSettings, date, this::updateGUI);
+        monthView = new MonthView(colorSettings, date, this);
         weekView = new WeekView(colorSettings, date);
         dayView = new DayView(colorSettings, date);
         eastPanel = new JPanel();
@@ -315,10 +318,42 @@ public class CalendarFrame extends JFrame {
             contentPanel.add(dayView, BorderLayout.CENTER);
         }
         System.out.println("UpdateGUI");
+        contentPanel.removeAll();
         northPanel.removeAll();
         southPanel.removeAll();
         buildFrame();
+        buildSidePanels();
+        setJMenuBar(menu);
+        addActionListenersToMenu();
         repaint();
         revalidate();
+    }
+
+    //TODO UPDATE PANEL LIST
+    @Override
+    public void panelClicked() {
+        clickedPanel = monthView.getClickedPanel();
+        System.out.println("Panel Clicked in frame");
+//        updateGUI();
+        updateClickedDay();
+    }
+
+    public void updateClickedDay(){
+        switch (colorSettings.getColorScheme()){
+            case "Grey" -> {
+                dayPanelDecorator = new DefaultPanelDecorator(clickedPanel);
+            }
+            case "Green" -> {
+                dayPanelDecorator = new GreenPanelDecorator(clickedPanel);
+            }
+            case "Pink" -> {
+                dayPanelDecorator = new PinkPanelDecorator(clickedPanel);
+            }
+            case "Ugly" -> {
+                dayPanelDecorator = new UglyPanelDecorator(clickedPanel);
+            }
+        }
+        clickedPanel.repaint();
+        clickedPanel.revalidate();
     }
 }

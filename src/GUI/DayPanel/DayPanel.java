@@ -40,4 +40,8 @@ public abstract class DayPanel extends JPanel {
         dateLabel.setOpaque(false);
         add(topPanel);
     }
+
+    public LocalDate getDate() {
+        return date;
+    }
 }

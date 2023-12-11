@@ -4,7 +4,6 @@ import GUI.ColorSettings;
 import GUI.DayOfMonth;
 import GUI.DayPanel.DayPanel;
 import GUI.DayPanel.DayPanelFactory;
-import GUI.DayPanel.Decorator.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -20,7 +19,7 @@ public class MonthView extends JPanel implements CalendarStrategy {
     LocalDate date;
     MonthViewParent monthViewParent;
     List<DayPanel> dayPanelList;
-    DayPanelDecorator dayPanelDecorator;
+    DayPanel clickedPanel;
 
     public MonthView(ColorSettings colorSettings, LocalDate date, MonthViewParent monthViewParent){
         this.colorSettings = colorSettings;
@@ -37,6 +36,9 @@ public class MonthView extends JPanel implements CalendarStrategy {
     @Override
     public void createView(){
         removeAll();
+        if(!dayPanelList.isEmpty()){
+            dayPanelList.clear();
+        }
         DayPanelFactory dayPanelFactory = new DayPanelFactory();
         DayOfMonth dayOfMonth = new DayOfMonth(date);
         List<LocalDate> localDateList = dayOfMonth.getDateList();
@@ -51,36 +53,23 @@ public class MonthView extends JPanel implements CalendarStrategy {
     @Override
     public void changeDetails(){
         createView();
+        addActionListersToDays();
         repaint();
         revalidate();
     }
 
-    public void addActionListersToDays(){
 
+
+    public void addActionListersToDays(){
         for(DayPanel dayPanel : dayPanelList){
             dayPanel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
                     super.mousePressed(e);
-                    switch (colorSettings.getColorScheme()){
-                        case "Grey" -> {
-                            dayPanelDecorator = new DefaultPanelDecorator(dayPanel);
-                            System.out.println("HUHEUH");
-                            monthViewParent.panelClicked();
-                        }
-                        case "Green" -> {
-                            dayPanelDecorator = new GreenPanelDecorator(dayPanel);
-                            monthViewParent.panelClicked();
-                        }
-                        case "Pink" -> {
-                            dayPanelDecorator = new PinkPanelDecorator(dayPanel);
-                            monthViewParent.panelClicked();
-                        }
-                        case "Ugly" -> {
-                            dayPanelDecorator = new UglyPanelDecorator(dayPanel);
-                            monthViewParent.panelClicked();
-                        }
-                    }
+                    System.out.println(dayPanel.getDate());
+                    clickedPanel = dayPanel;
+                    monthViewParent.panelClicked();
+//                    dayPanel.setBackground(Color.blue);
                 }
             });
         }
@@ -93,5 +82,14 @@ public class MonthView extends JPanel implements CalendarStrategy {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public DayPanel getClickedPanel() {
+        return clickedPanel;
+    }
+
+    public void updateClickedLabel(){
+        clickedPanel.repaint();
+        clickedPanel.revalidate();
     }
 }
