@@ -26,17 +26,6 @@ public class MonthView extends JPanel implements CalendarStrategy {
 
     @Override
     public void createView(){
-        buildDays();
-    }
-
-    @Override
-    public void changeDetails(){
-        buildDays();
-        repaint();
-        revalidate();
-    }
-
-    public void buildDays(){
         removeAll();
         DayPanelFactory dayPanelFactory = new DayPanelFactory();
         DayOfMonth dayOfMonth = new DayOfMonth(date);
@@ -48,9 +37,16 @@ public class MonthView extends JPanel implements CalendarStrategy {
         }
     }
 
+    @Override
+    public void changeDetails(){
+        createView();
+        repaint();
+        revalidate();
+    }
+
     public void setColorSettings(ColorSettings colorSettings) {
         this.colorSettings = colorSettings;
-        buildDays();
+        createView();
     }
 
     public void setDate(LocalDate date) {
