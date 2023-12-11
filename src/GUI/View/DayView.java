@@ -1,9 +1,6 @@
 package GUI.View;
 
 import GUI.ColorSettings;
-import GUI.DayOfMonth;
-import GUI.DayPanel.DayPanel;
-import GUI.DayPanel.DayPanelFactory;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -11,7 +8,6 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.time.LocalDate;
-import java.util.List;
 
 public class DayView extends JPanel implements CalendarStrategy {
 
@@ -52,6 +48,7 @@ public class DayView extends JPanel implements CalendarStrategy {
         createView();
         repaint();
         revalidate();
+        System.out.println(date);
     }
 
     public void buildNorthPanel(){

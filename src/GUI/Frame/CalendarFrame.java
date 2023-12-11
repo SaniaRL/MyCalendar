@@ -11,7 +11,6 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.time.LocalDate;
-//import java.util.Calendar;
 
 public class CalendarFrame extends JFrame {
 
@@ -23,10 +22,10 @@ public class CalendarFrame extends JFrame {
     private final JPanel southPanel;
 
     //Views
+    CalendarStrategy view;
     MonthView monthView;
     WeekView weekView;
     DayView dayView;
-    CalendarStrategy view;
 
     //Labels
     JLabel monthLabel;
@@ -75,10 +74,13 @@ public class CalendarFrame extends JFrame {
         icon = new ImageIcon("Icons/calendarIcon.png");
         view = monthView;
 
+        //Action Listeners
+
         buildFrame();
+        buildSidePanels();
+        setJMenuBar(menu);
+        addActionListenersToMenu();
     }
-
-
 
     private void buildFrame(){
         setSize(new Dimension(1000, 600));
@@ -95,7 +97,6 @@ public class CalendarFrame extends JFrame {
         //Build panels
         buildNorthPanel();
         contentPanel.add(northPanel, BorderLayout.NORTH);
-        buildSidePanels();
         buildSouthPanel();
 
         //Add views
@@ -108,12 +109,8 @@ public class CalendarFrame extends JFrame {
         else if(view == dayView){
             contentPanel.add(dayView, BorderLayout.CENTER);
         }
-//        contentPanel.add(monthView, BorderLayout.CENTER);
-//        contentPanel.add(dayView, BorderLayout.CENTER);
 
         //Add menu & Set action Listener to menu
-        setJMenuBar(menu);
-        addActionListenersToMenu();
 
         add(contentPanel);
         setVisible(true);
@@ -142,8 +139,6 @@ public class CalendarFrame extends JFrame {
         //Build buttons for new post and account and add
         buildNorthPanelButtons(newPost, "+");
         buildNorthPanelButtons(account,"Icons/account.png");
-//        leftPanel.add(newPost);
-//        rightPanel.add(account);
 
         Border emptyTopBorder = BorderFactory.createEmptyBorder(10, 0,0,0);
         monthLabel = new JLabel(String.valueOf(date.getMonth()), SwingConstants.CENTER);
@@ -171,9 +166,9 @@ public class CalendarFrame extends JFrame {
     }
 
     public void buildWeekPanel(){
+        JPanel weekDays = new JPanel(new GridLayout(1, 7));
         JPanel weekDayPanel = new JPanel(new BorderLayout());
         weekDayPanel.setOpaque(false);
-        JPanel weekDays = new JPanel(new GridLayout(1, 7));
         weekDays.setOpaque(false);
         String[] weekDayNames = {
                 "Monday",
@@ -224,20 +219,18 @@ public class CalendarFrame extends JFrame {
         button.setBackground(colorSettings.getEmptyBackgroundColor());
         button.setBorder(new LineBorder(colorSettings.getBorderColor(), 3));
 
+        System.out.println("Build button: " + i);
         button.addActionListener(e -> {
             if(view == monthView){
                 date = date.plusMonths(i);
             }
-            if(view == dayView){
+            else if(view == dayView){
                 date = date.plusDays(i);
             }
             changeDetails();
         });
     }
 
-    public void doShit(){
-
-    }
 
     public void buildSouthPanel(){
         southPanel.setOpaque(false);
@@ -248,13 +241,15 @@ public class CalendarFrame extends JFrame {
 
     public void changeDetails(){
 
-        if(view == monthView){
+        if(view.equals(monthView)){
             monthView.setDate(date);
             monthView.changeDetails();
+            System.out.println("Change details in Frame : monthView");
         }
-        if(view == dayView){
+        if(view.equals(dayView)){
             dayView.setDate(date);
             dayView.changeDetails();
+            System.out.println("Change details in Frame : dayView");
         }
         repaint();
         revalidate();
@@ -272,11 +267,15 @@ public class CalendarFrame extends JFrame {
             updateGUI();
         });
 
+        menu.week.addActionListener(e -> {
+            view = weekView;
+            updateGUI();
+        });
+
         menu.day.addActionListener(e -> {
             view = dayView;
             updateGUI();
         });
-
 
         //Color Menu
         menu.grey.addActionListener(e -> {
@@ -303,12 +302,19 @@ public class CalendarFrame extends JFrame {
             contentPanel.remove(weekView);
             monthView.setColorSettings(colorSettings);
         }
+        if(view == weekView){
+            contentPanel.remove(monthView);
+            contentPanel.remove(weekView);
+            weekView.setColorSettings(colorSettings);
+            contentPanel.add(weekView, BorderLayout.CENTER);
+        }
         if(view == dayView){
             contentPanel.remove(monthView);
             contentPanel.remove(weekView);
             dayView.setColorSettings(colorSettings);
             contentPanel.add(dayView, BorderLayout.CENTER);
         }
+        System.out.println("UpdateGUI");
         northPanel.removeAll();
         southPanel.removeAll();
         buildFrame();

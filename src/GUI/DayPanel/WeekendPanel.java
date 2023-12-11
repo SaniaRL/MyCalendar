@@ -2,7 +2,6 @@ package GUI.DayPanel;
 
 import GUI.ColorSettings;
 
-import java.awt.*;
 import java.time.LocalDate;
 
 public class WeekendPanel extends DayPanel {

@@ -2,7 +2,7 @@ package GUI.View;
 
 public interface CalendarStrategy {
 
-    public void createView();
+    void createView();
 
-    public void changeDetails();
+    void changeDetails();
 }
