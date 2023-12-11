@@ -35,14 +35,6 @@ public class DayOfMonth {
         return date.minusDays(daysBefore);
     }
 
-    //Sparar denna om den behövs senare i nån dags-vy eller dylikt
-    public LocalDate getLastDayOfMonth(LocalDate date){
-        LocalDate firstDateOfThisMonth = LocalDate.of(date.getYear(), date.getMonth(), 1);
-        LocalDate firstDateOfNextMonth = firstDateOfThisMonth.plusMonths(1);
-
-        return firstDateOfNextMonth.minusDays(1);
-    }
-
     public List<LocalDate> getDateList() {
         return dateList;
     }

@@ -17,7 +17,7 @@ public abstract class DayPanel extends JPanel {
 
     protected DayPanel(LocalDate date, ColorSettings colorSettings){
         this.date = date;
-        dateLabel = new JLabel(" " + String.valueOf(date.getDayOfMonth()));
+        dateLabel = new JLabel(" " + date.getDayOfMonth());
         dayOfMonth = new DayOfMonth(date);
         color = colorSettings;
         buildPanel();
