@@ -5,13 +5,13 @@ import GUI.DayPanel.DayPanel;
 
 public abstract class DayPanelDecorator {
 
-    ColorSettings colorSettings;
     DayPanel dayPanel;
 
-    public DayPanelDecorator(ColorSettings colorSettings, DayPanel dayPanel) {
-        this.colorSettings = colorSettings;
+    public DayPanelDecorator( DayPanel dayPanel) {
         this.dayPanel = dayPanel;
     }
 
-    void setColor(){}
+    void setColor(){
+        System.out.println("DayPanelDecorator");
+    }
 }

@@ -8,8 +8,8 @@ import java.awt.*;
 
 public class DefaultPanelDecorator extends DayPanelDecorator {
 
-    public DefaultPanelDecorator(ColorSettings colorSettings, DayPanel dayPanel){
-        super(colorSettings, dayPanel);
+    public DefaultPanelDecorator(DayPanel dayPanel){
+        super(dayPanel);
     }
 
     @Override
