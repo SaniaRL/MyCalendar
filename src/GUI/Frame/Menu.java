@@ -12,6 +12,11 @@ public class Menu extends JMenuBar {
     JMenuItem pink;
     JMenuItem ugly;
 
+    JMenu view;
+    JMenuItem month;
+    JMenuItem week;
+    JMenuItem day;
+
     JMenuItem logOut;
 
     public Menu(){
@@ -20,10 +25,23 @@ public class Menu extends JMenuBar {
         logOut = new JMenuItem("Log Out");
 
         add(menu);
+        addViews();
         addColorMenu();
         menu.add(logOut);
 
         setVisible(true);
+    }
+
+    public void addViews(){
+        view = new JMenu("View");
+        month = new JMenuItem("Month");
+        week = new JMenuItem("Week");
+        day = new JMenuItem("Day");
+
+        view.add(month);
+        view.add(week);
+        view.add(day);
+        menu.add(view);
     }
 
     public void addColorMenu(){
@@ -38,4 +56,6 @@ public class Menu extends JMenuBar {
         colorMenu.add(ugly);
         menu.add(colorMenu);
     }
+
+
 }

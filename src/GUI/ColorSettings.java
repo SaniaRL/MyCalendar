@@ -1,6 +1,5 @@
 package GUI;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class ColorSettings {
@@ -17,15 +16,6 @@ public class ColorSettings {
 
     public ColorSettings(){
         setDefaultColorScheme();
-    }
-
-    public void setColorScheme(String color){
-        switch(color.toLowerCase()){
-            case "ugly" -> setUglyColorScheme();
-            case "green" -> setGreenColorScheme();
-            case "pink" -> setPinkColorScheme();
-            default -> setDefaultColorScheme();
-        }
     }
 
     public void setDefaultColorScheme(){

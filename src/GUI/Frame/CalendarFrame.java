@@ -1,8 +1,10 @@
 package GUI.Frame;
 
 import GUI.ColorSettings;
+import GUI.View.CalendarStrategy;
 import GUI.View.DayView;
 import GUI.View.MonthView;
+import GUI.View.WeekView;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -22,7 +24,9 @@ public class CalendarFrame extends JFrame {
 
     //Views
     MonthView monthView;
+    WeekView weekView;
     DayView dayView;
+    CalendarStrategy view;
 
     //Labels
     JLabel monthLabel;
@@ -59,6 +63,7 @@ public class CalendarFrame extends JFrame {
         contentPanel = new JPanel();
         northPanel = new JPanel();
         monthView = new MonthView(colorSettings, date);
+        weekView = new WeekView(colorSettings, date);
         dayView = new DayView(colorSettings, date);
         eastPanel = new JPanel();
         westPanel = new JPanel();
@@ -68,6 +73,7 @@ public class CalendarFrame extends JFrame {
         newPost = new JButton();
         account = new JButton();
         icon = new ImageIcon("Icons/calendarIcon.png");
+        view = monthView;
 
         buildFrame();
     }
@@ -93,7 +99,16 @@ public class CalendarFrame extends JFrame {
         buildSouthPanel();
 
         //Add views
-        contentPanel.add(monthView, BorderLayout.CENTER);
+        if(view == monthView){
+            contentPanel.add(monthView, BorderLayout.CENTER);
+        }
+        else if(view == weekView){
+            contentPanel.add(weekView, BorderLayout.CENTER);
+        }
+        else if(view == dayView){
+            contentPanel.add(dayView, BorderLayout.CENTER);
+        }
+//        contentPanel.add(monthView, BorderLayout.CENTER);
 //        contentPanel.add(dayView, BorderLayout.CENTER);
 
         //Add menu & Set action Listener to menu
@@ -123,10 +138,11 @@ public class CalendarFrame extends JFrame {
         topPanel.add(middlePanel);
         topPanel.add(rightPanel);
 
+        //TODO Decide on buttons existens
         //Build buttons for new post and account and add
         buildNorthPanelButtons(newPost, "+");
         buildNorthPanelButtons(account,"Icons/account.png");
-        leftPanel.add(newPost);
+//        leftPanel.add(newPost);
 //        rightPanel.add(account);
 
         Border emptyTopBorder = BorderFactory.createEmptyBorder(10, 0,0,0);
@@ -209,9 +225,18 @@ public class CalendarFrame extends JFrame {
         button.setBorder(new LineBorder(colorSettings.getBorderColor(), 3));
 
         button.addActionListener(e -> {
-            date = date.plusMonths(i);
-            changeMonthDetails();
+            if(view == monthView){
+                date = date.plusMonths(i);
+            }
+            if(view == dayView){
+                date = date.plusDays(i);
+            }
+            changeDetails();
         });
+    }
+
+    public void doShit(){
+
     }
 
     public void buildSouthPanel(){
@@ -221,10 +246,16 @@ public class CalendarFrame extends JFrame {
         contentPanel.add(southPanel, BorderLayout.SOUTH);
     }
 
-    public void changeMonthDetails(){
+    public void changeDetails(){
 
-        monthView.setDate(date);
-        monthView.changeDetails();
+        if(view == monthView){
+            monthView.setDate(date);
+            monthView.changeDetails();
+        }
+        if(view == dayView){
+            dayView.setDate(date);
+            dayView.changeDetails();
+        }
         repaint();
         revalidate();
 
@@ -235,26 +266,49 @@ public class CalendarFrame extends JFrame {
     }
 
     public void addActionListenersToMenu(){
+        //View Menu
+        menu.month.addActionListener(e -> {
+            view = monthView;
+            updateGUI();
+        });
+
+        menu.day.addActionListener(e -> {
+            view = dayView;
+            updateGUI();
+        });
+
+
+        //Color Menu
         menu.grey.addActionListener(e -> {
             colorSettings.setDefaultColorScheme();
-            resetColor();
+            updateGUI();
         });
         menu.green.addActionListener(e -> {
             colorSettings.setGreenColorScheme();
-            resetColor();
+            updateGUI();
         });
         menu.pink.addActionListener(e -> {
             colorSettings.setPinkColorScheme();
-            resetColor();
+            updateGUI();
         });
         menu.ugly.addActionListener(e -> {
             colorSettings.setUglyColorScheme();
-            resetColor();
+            updateGUI();
         });
     }
 
-    public void resetColor(){
-        monthView.setColorSettings(colorSettings);
+    public void updateGUI(){
+        if(view == monthView){
+            contentPanel.remove(dayView);
+            contentPanel.remove(weekView);
+            monthView.setColorSettings(colorSettings);
+        }
+        if(view == dayView){
+            contentPanel.remove(monthView);
+            contentPanel.remove(weekView);
+            dayView.setColorSettings(colorSettings);
+            contentPanel.add(dayView, BorderLayout.CENTER);
+        }
         northPanel.removeAll();
         southPanel.removeAll();
         buildFrame();
