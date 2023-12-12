@@ -3,6 +3,8 @@ package GUI;
 import java.awt.*;
 
 public class ColorSettings {
+
+    private String colorScheme;
     private Color color;
     private Color todayBackgroundColor;
     private Color todayForegroundColor;
@@ -19,6 +21,7 @@ public class ColorSettings {
     }
 
     public void setDefaultColorScheme(){
+        colorScheme = "Grey";
         color = Color.white;
         todayBackgroundColor = new Color(100, 255, 100);
         todayForegroundColor = new Color(0, 40, 0);
@@ -32,6 +35,7 @@ public class ColorSettings {
     }
 
     public void setGreenColorScheme(){
+        colorScheme = "Green";
         color = new Color(170, 255, 170);
         todayBackgroundColor = new Color(100, 255, 100);
         todayForegroundColor = new Color(0, 40, 0);
@@ -45,6 +49,7 @@ public class ColorSettings {
     }
 
     public void setPinkColorScheme(){
+        colorScheme = "Pink";
         color = new Color(255, 230, 250);
         todayBackgroundColor = new Color(220, 120, 180);
         todayForegroundColor = new Color(150, 30, 90);
@@ -58,6 +63,7 @@ public class ColorSettings {
     }
 
     public void setUglyColorScheme(){
+        colorScheme = "Ugly";
         color = Color.green;
         todayBackgroundColor = new Color(100, 255, 100);
         todayForegroundColor = new Color(0, 40, 0);
@@ -108,5 +114,9 @@ public class ColorSettings {
 
     public Color getColor() {
         return color;
+    }
+
+    public String getColorScheme() {
+        return colorScheme;
     }
 }

@@ -1,10 +1,9 @@
 package GUI.Frame;
 
 import GUI.ColorSettings;
-import GUI.View.CalendarStrategy;
-import GUI.View.DayView;
-import GUI.View.MonthView;
-import GUI.View.WeekView;
+import GUI.DayPanel.DayPanel;
+import GUI.DayPanel.Decorator.*;
+import GUI.View.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -12,7 +11,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.time.LocalDate;
 
-public class CalendarFrame extends JFrame {
+public class CalendarFrame extends JFrame implements MonthViewParent {
 
     //Panels
     private final JPanel contentPanel;
@@ -47,6 +46,9 @@ public class CalendarFrame extends JFrame {
     private final ImageIcon icon;
     private ColorSettings colorSettings;
 
+    DayPanel clickedPanel;
+    DayPanelDecorator dayPanelDecorator;
+
 
     //TODO Remove Main
     public static void main(String[] args){
@@ -61,7 +63,8 @@ public class CalendarFrame extends JFrame {
         colorSettings = new ColorSettings();
         contentPanel = new JPanel();
         northPanel = new JPanel();
-        monthView = new MonthView(colorSettings, date);
+        //I want to use method Update GUI here it there is a call back
+        monthView = new MonthView(colorSettings, date, this);
         weekView = new WeekView(colorSettings, date);
         dayView = new DayView(colorSettings, date);
         eastPanel = new JPanel();
@@ -315,10 +318,24 @@ public class CalendarFrame extends JFrame {
             contentPanel.add(dayView, BorderLayout.CENTER);
         }
         System.out.println("UpdateGUI");
+        contentPanel.removeAll();
         northPanel.removeAll();
         southPanel.removeAll();
         buildFrame();
+        buildSidePanels();
+        setJMenuBar(menu);
+        addActionListenersToMenu();
         repaint();
         revalidate();
     }
+
+    //TODO UPDATE PANEL LIST
+    @Override
+    public void panelClicked() {
+        clickedPanel = monthView.getClickedPanel();
+        System.out.println("Panel Clicked in frame");
+//        updateGUI();
+    }
+
+
 }
