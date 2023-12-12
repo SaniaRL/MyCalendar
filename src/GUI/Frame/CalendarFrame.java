@@ -9,6 +9,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
 public class CalendarFrame extends JFrame implements MonthViewParent {
@@ -47,7 +48,6 @@ public class CalendarFrame extends JFrame implements MonthViewParent {
     private ColorSettings colorSettings;
 
     DayPanel clickedPanel;
-    DayPanelDecorator dayPanelDecorator;
 
 
     //TODO Remove Main
@@ -222,6 +222,10 @@ public class CalendarFrame extends JFrame implements MonthViewParent {
         button.setBackground(colorSettings.getEmptyBackgroundColor());
         button.setBorder(new LineBorder(colorSettings.getBorderColor(), 3));
 
+        for(ActionListener actionListener : button.getActionListeners()){
+            button.removeActionListener(actionListener);
+        }
+
         System.out.println("Build button: " + i);
         button.addActionListener(e -> {
             if(view == monthView){
@@ -233,6 +237,7 @@ public class CalendarFrame extends JFrame implements MonthViewParent {
             changeDetails();
         });
     }
+
 
 
     public void buildSouthPanel(){
@@ -334,7 +339,6 @@ public class CalendarFrame extends JFrame implements MonthViewParent {
     public void panelClicked() {
         clickedPanel = monthView.getClickedPanel();
         System.out.println("Panel Clicked in frame");
-//        updateGUI();
     }
 
 
