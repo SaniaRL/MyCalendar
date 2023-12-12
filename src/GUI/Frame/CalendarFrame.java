@@ -234,6 +234,9 @@ public class CalendarFrame extends JFrame implements MonthViewParent {
             else if(view == dayView){
                 date = date.plusDays(i);
             }
+            else if(view == weekView){
+                date = date.plusDays(i * 7L);
+            }
             changeDetails();
         });
     }

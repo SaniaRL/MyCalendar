@@ -1,15 +1,14 @@
-package FileManaging;
+package GUI.Post.FileManaging;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Writer {
+public class Reader {
 
     //List for paths
     List<String> pathList = new ArrayList<>();
 
-
-    public Writer(){
+    public Reader(){
 
     }
 }

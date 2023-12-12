@@ -1,4 +1,4 @@
 package GUI.Post;
 
-public class Note {
+public class Note extends Post{
 }

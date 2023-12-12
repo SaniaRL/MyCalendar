@@ -15,4 +15,12 @@ public class WeekendPanel extends DayPanel {
         setBackground(color.getWeekendBackgroundColor());
         dateLabel.setForeground(color.getWeekendForegroundColor());
     }
+
+    @Override
+    public void restore(){
+        setBorder(border);
+        setBackground(color.getWeekendBackgroundColor());
+        dateLabel.setForeground(color.getWeekendForegroundColor());
+    }
+
 }

@@ -77,6 +77,7 @@ public class MonthView extends JPanel implements CalendarStrategy {
     }
 
     public void updateClickedDay(){
+        resetDayPanels();
         switch (colorSettings.getColorScheme()){
             case "Grey" -> {
                 dayPanelDecorator = new DefaultPanelDecorator(clickedPanel);
@@ -93,6 +94,12 @@ public class MonthView extends JPanel implements CalendarStrategy {
         }
         clickedPanel.repaint();
         clickedPanel.revalidate();
+    }
+
+    public void resetDayPanels(){
+        for(DayPanel dayPanel : dayPanelList){
+            dayPanel.restore();
+        }
     }
 
     public void setColorSettings(ColorSettings colorSettings) {
