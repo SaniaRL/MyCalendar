@@ -14,15 +14,17 @@ public abstract class DayPanel extends JPanel implements BuildRestore {
     protected LocalDate date;
     protected JLabel dateLabel;
     protected DayOfMonth dayOfMonth;
-    protected ColorSettings color;
     protected Border border;
+    protected Color backgroundColor;
+    protected Color forefroundColor;
 
-    protected DayPanel(LocalDate date, ColorSettings colorSettings){
+    protected DayPanel(LocalDate date, Color backgroundColor, Color forefroundColor, Color borderColor){
         this.date = date;
+        this.backgroundColor = backgroundColor;
+        this.forefroundColor = forefroundColor;
+        this.border = new LineBorder(borderColor, 1);
         dateLabel = new JLabel(" " + date.getDayOfMonth());
         dayOfMonth = new DayOfMonth(date);
-        color = colorSettings;
-        border = new LineBorder(color.getBorderColor());
         buildPanel();
     }
 
@@ -32,7 +34,6 @@ public abstract class DayPanel extends JPanel implements BuildRestore {
         setBorder(border);
 
         setDateLabel();
-
         setVisible(true);
     }
 
@@ -46,6 +47,19 @@ public abstract class DayPanel extends JPanel implements BuildRestore {
 
     public LocalDate getDate() {
         return date;
+    }
+
+    @Override
+    public void addDetails(){
+        setBackground(backgroundColor);
+        dateLabel.setForeground(forefroundColor);
+    }
+
+    @Override
+    public void restore(){
+        setBorder(border);
+        setBackground(backgroundColor);
+        dateLabel.setForeground(forefroundColor);
     }
 
 }

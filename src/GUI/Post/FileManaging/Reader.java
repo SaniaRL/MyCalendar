@@ -6,9 +6,9 @@ import java.util.List;
 public class Reader {
 
     //List for paths
-    List<String> pathList = new ArrayList<>();
+    String path;
 
-    public Reader(){
-
+    public Reader(String path){
+        this.path = path;
     }
 }

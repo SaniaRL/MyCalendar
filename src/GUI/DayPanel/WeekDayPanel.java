@@ -7,20 +7,8 @@ import java.time.LocalDate;
 public class WeekDayPanel extends DayPanel {
 
     public WeekDayPanel(LocalDate date, ColorSettings colorSettings){
-        super(date, colorSettings);
+        super(date, colorSettings.getWeekdayBackgroundColor(), colorSettings.getWeekdayForegroundColor(),
+                colorSettings.getBorderColor());
         addDetails();
-    }
-
-    @Override
-    public void addDetails(){
-        setBackground(color.getWeekdayBackgroundColor());
-        dateLabel.setForeground(color.getWeekdayForegroundColor());
-    }
-
-    @Override
-    public void restore(){
-        setBorder(border);
-        setBackground(color.getWeekdayBackgroundColor());
-        dateLabel.setForeground(color.getWeekdayForegroundColor());
     }
 }

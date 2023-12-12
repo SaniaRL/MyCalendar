@@ -1,4 +1,4 @@
-package GUI.Post.FileManaging;
+package GUI.Post;
 
 import GUI.ColorSettings;
 
@@ -7,16 +7,18 @@ import java.awt.*;
 
 public class PostFrame extends JFrame {
     ColorSettings colorSettings;
+    ImageIcon icon;
 
     public PostFrame(ColorSettings colorSettings){
         this.colorSettings = colorSettings;
-        buildFrame();
+        icon = new ImageIcon("Icons/calendar.png");
     }
 
     public void buildFrame(){
         setSize(new Dimension(300, 500));
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        setIconImage(icon.getImage());
         setVisible(true);
     }
 }

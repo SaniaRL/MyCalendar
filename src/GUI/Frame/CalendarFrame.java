@@ -2,8 +2,7 @@ package GUI.Frame;
 
 import GUI.ColorSettings;
 import GUI.DayPanel.DayPanel;
-import GUI.DayPanel.Decorator.*;
-import GUI.Post.FileManaging.PostFrame;
+import GUI.Post.PostFrame;
 import GUI.View.*;
 
 import javax.swing.*;
@@ -81,7 +80,7 @@ public class CalendarFrame extends JFrame implements MonthViewParent {
         previousMonth = new JButton("<<");
         newPost = new JButton();
         account = new JButton();
-        icon = new ImageIcon("Icons/calendarIcon.png");
+        icon = new ImageIcon("Icons/calendar.png");
         view = monthView;
 
         //Action Listeners
@@ -345,18 +344,14 @@ public class CalendarFrame extends JFrame implements MonthViewParent {
     }
 
     //TODO UPDATE PANEL LIST
-    @Override
     public void panelClicked() {
         clickedPanel = monthView.getClickedPanel();
         clickedPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                postFrame.buildFrame();
-
+                SwingUtilities.invokeLater(()-> postFrame.buildFrame());
             }
         });
     }
-
-
 }
