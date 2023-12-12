@@ -10,7 +10,15 @@ public class TodayPanel extends DayPanel{
         addDetails();
     }
 
+    @Override
     public void addDetails(){
+        setBackground(color.getTodayBackgroundColor());
+        dateLabel.setForeground(color.getTodayForegroundColor());
+    }
+
+    @Override
+    public void restore(){
+        setBorder(border);
         setBackground(color.getTodayBackgroundColor());
         dateLabel.setForeground(color.getTodayForegroundColor());
     }

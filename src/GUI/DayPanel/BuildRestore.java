@@ -1,2 +1,6 @@
-package GUI.DayPanel.Decorator;public interface BuildRestore {
+package GUI.DayPanel;
+
+public interface BuildRestore {
+    void addDetails();
+    void restore();
 }
