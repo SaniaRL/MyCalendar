@@ -3,6 +3,7 @@ package GUI.Frame;
 import GUI.ColorSettings;
 import GUI.DayPanel.DayPanel;
 import GUI.DayPanel.Decorator.*;
+import GUI.Post.FileManaging.PostFrame;
 import GUI.View.*;
 
 import javax.swing.*;
@@ -10,9 +11,14 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 
 public class CalendarFrame extends JFrame implements MonthViewParent {
+
+    //Frames
+    PostFrame postFrame;
 
     //Panels
     private final JPanel contentPanel;
@@ -20,6 +26,7 @@ public class CalendarFrame extends JFrame implements MonthViewParent {
     private final JPanel eastPanel;
     private final JPanel westPanel;
     private final JPanel southPanel;
+    DayPanel clickedPanel;
 
     //Views
     CalendarStrategy view;
@@ -47,7 +54,6 @@ public class CalendarFrame extends JFrame implements MonthViewParent {
     private final ImageIcon icon;
     private ColorSettings colorSettings;
 
-    DayPanel clickedPanel;
 
 
     //TODO Remove Main
@@ -60,6 +66,7 @@ public class CalendarFrame extends JFrame implements MonthViewParent {
         colorSettings = new ColorSettings();
         date = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 1);
         menu = new Menu();
+        postFrame = new PostFrame(colorSettings);
         colorSettings = new ColorSettings();
         contentPanel = new JPanel();
         northPanel = new JPanel();
@@ -341,7 +348,14 @@ public class CalendarFrame extends JFrame implements MonthViewParent {
     @Override
     public void panelClicked() {
         clickedPanel = monthView.getClickedPanel();
-        System.out.println("Panel Clicked in frame");
+        clickedPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                postFrame.buildFrame();
+
+            }
+        });
     }
 
 
