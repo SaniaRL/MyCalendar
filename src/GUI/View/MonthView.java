@@ -4,6 +4,8 @@ import GUI.ColorSettings;
 import GUI.DayOfMonth;
 import GUI.DayPanel.DayPanel;
 import GUI.DayPanel.DayPanelFactory;
+import GUI.DayPanel.Decorator.*;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -20,6 +22,7 @@ public class MonthView extends JPanel implements CalendarStrategy {
     MonthViewParent monthViewParent;
     List<DayPanel> dayPanelList;
     DayPanel clickedPanel;
+    DayPanelDecorator dayPanelDecorator;
 
     public MonthView(ColorSettings colorSettings, LocalDate date, MonthViewParent monthViewParent){
         this.colorSettings = colorSettings;
@@ -58,8 +61,6 @@ public class MonthView extends JPanel implements CalendarStrategy {
         revalidate();
     }
 
-
-
     public void addActionListersToDays(){
         for(DayPanel dayPanel : dayPanelList){
             dayPanel.addMouseListener(new MouseAdapter() {
@@ -69,10 +70,29 @@ public class MonthView extends JPanel implements CalendarStrategy {
                     System.out.println(dayPanel.getDate());
                     clickedPanel = dayPanel;
                     monthViewParent.panelClicked();
-//                    dayPanel.setBackground(Color.blue);
+                    updateClickedDay();
                 }
             });
         }
+    }
+
+    public void updateClickedDay(){
+        switch (colorSettings.getColorScheme()){
+            case "Grey" -> {
+                dayPanelDecorator = new DefaultPanelDecorator(clickedPanel);
+            }
+            case "Green" -> {
+                dayPanelDecorator = new GreenPanelDecorator(clickedPanel);
+            }
+            case "Pink" -> {
+                dayPanelDecorator = new PinkPanelDecorator(clickedPanel);
+            }
+            case "Ugly" -> {
+                dayPanelDecorator = new UglyPanelDecorator(clickedPanel);
+            }
+        }
+        clickedPanel.repaint();
+        clickedPanel.revalidate();
     }
 
     public void setColorSettings(ColorSettings colorSettings) {

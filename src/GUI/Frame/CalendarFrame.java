@@ -335,25 +335,7 @@ public class CalendarFrame extends JFrame implements MonthViewParent {
         clickedPanel = monthView.getClickedPanel();
         System.out.println("Panel Clicked in frame");
 //        updateGUI();
-        updateClickedDay();
     }
 
-    public void updateClickedDay(){
-        switch (colorSettings.getColorScheme()){
-            case "Grey" -> {
-                dayPanelDecorator = new DefaultPanelDecorator(clickedPanel);
-            }
-            case "Green" -> {
-                dayPanelDecorator = new GreenPanelDecorator(clickedPanel);
-            }
-            case "Pink" -> {
-                dayPanelDecorator = new PinkPanelDecorator(clickedPanel);
-            }
-            case "Ugly" -> {
-                dayPanelDecorator = new UglyPanelDecorator(clickedPanel);
-            }
-        }
-        clickedPanel.repaint();
-        clickedPanel.revalidate();
-    }
+
 }

@@ -12,6 +12,6 @@ public abstract class DayPanelDecorator {
     }
 
     void setColor(){
-        System.out.println("DayPanelDecorator");
+        System.out.println("Set Color");
     }
 }
