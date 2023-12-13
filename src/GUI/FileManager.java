@@ -16,7 +16,7 @@ public class FileManager {
     }
 
     public void writeToFile(String path, String content) throws IOException {
-        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path))){
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path, true))){
             bufferedWriter.write(content);
 
         }

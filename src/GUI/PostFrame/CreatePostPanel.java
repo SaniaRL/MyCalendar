@@ -79,10 +79,14 @@ public class CreatePostPanel extends JPanel implements FileOperation {
         add(southPanel, BorderLayout.SOUTH);
     }
 
+    public void addActionListenerToButtons() {
+        save.addActionListener(e -> fileOperations(FileOperationType.WRITE));
+
+    }
+
     public void saveToFile(String dateString, String category, String content) {
 
-
-        String entry = "Hej jag är en apa";
+        String entry = dateString + regex + category + regex + content + "\n";
 
         try{
             fileManager.writeToFile("Persistence/Diary.txt", entry);
@@ -100,20 +104,23 @@ public class CreatePostPanel extends JPanel implements FileOperation {
     }
 
     //TODO make sure it's not only diary
-
-    public void addActionListenerToButtons() {
-        save.addActionListener(e -> fileOperations(FileOperationType.WRITE));
-
-    }
     @Override
     public void fileOperations(FileOperationType fileOperationType){
         String dateString = String.valueOf(date);
         String category = "Diary";
         String content = textArea.getText();
+        textArea.setText("");
 
         switch (fileOperationType){
             case READ -> System.out.println("READ");
-            case WRITE -> saveToFile(dateString, category, content);
+            case WRITE -> {
+                if(!checkIfTextContainsRegex(content)){
+                    saveToFile(dateString, category, content);
+                }
+                else{
+                    System.out.println("Contains regex");
+                }
+            }
             case ACCESS -> System.out.println("ACCESS");
         }
     }
