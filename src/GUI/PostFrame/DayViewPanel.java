@@ -1,14 +1,15 @@
-package GUI.Frame;
+package GUI.PostFrame;
 
-import GUI.FileManager;
 import GUI.ColorSettings;
+import GUI.FileManager;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.time.LocalDate;
 
-public class PostFrame extends JFrame {
+public class DayViewPanel extends JPanel {
+
     ColorSettings colorSettings;
     LocalDate date;
     ImageIcon icon;
@@ -29,8 +30,9 @@ public class PostFrame extends JFrame {
 
     FileManager fileManager;
 
-    public PostFrame(ColorSettings colorSettings){
+    public DayViewPanel(ColorSettings colorSettings, LocalDate date){
         this.colorSettings = colorSettings;
+        this.date = date;
         icon = new ImageIcon("Icons/7.png");
         contentPanel = new JPanel(new BorderLayout());
         northPanel = new JPanel(new GridLayout(1, 3));
@@ -43,13 +45,8 @@ public class PostFrame extends JFrame {
         fileManager = FileManager.getInstance();
     }
 
-    public void buildFrame(LocalDate date){
-        this.date = date;
+    public void buildPanel(){
         setSize(new Dimension(400, 600));
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setIconImage(icon.getImage());
-        setResizable(false);
 
         contentPanel.setBackground(colorSettings.getColor());
         add(contentPanel);

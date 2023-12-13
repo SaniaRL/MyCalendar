@@ -1,4 +1,4 @@
-package GUI.Frame;
+package GUI.PostFrame;
 
 import javax.swing.*;
 import java.awt.*;

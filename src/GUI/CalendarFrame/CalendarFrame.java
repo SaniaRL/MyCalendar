@@ -1,7 +1,8 @@
-package GUI.Frame;
+package GUI.CalendarFrame;
 
 import GUI.ColorSettings;
 import GUI.DayPanel.DayPanel;
+import GUI.PostFrame.PostFrame;
 import GUI.View.*;
 
 import javax.swing.*;
