@@ -8,6 +8,6 @@ public class TodayPanel extends DayPanel{
     protected TodayPanel(LocalDate date, ColorSettings colorSettings) {
         super(date, colorSettings.getTodayBackgroundColor(), colorSettings.getTodayForegroundColor(),
                 colorSettings.getBorderColor());
-        addDetails();
+        setDetails();
     }
 }

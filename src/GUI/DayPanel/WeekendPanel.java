@@ -9,7 +9,7 @@ public class WeekendPanel extends DayPanel {
     public WeekendPanel(LocalDate date, ColorSettings colorSettings){
         super(date, colorSettings.getWeekendBackgroundColor(), colorSettings.getWeekendForegroundColor(),
                 colorSettings.getBorderColor());
-        addDetails();
+        setDetails();
     }
 
 }

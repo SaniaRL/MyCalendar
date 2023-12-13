@@ -9,6 +9,6 @@ public class WeekDayPanel extends DayPanel {
     public WeekDayPanel(LocalDate date, ColorSettings colorSettings){
         super(date, colorSettings.getWeekdayBackgroundColor(), colorSettings.getWeekdayForegroundColor(),
                 colorSettings.getBorderColor());
-        addDetails();
+        setDetails();
     }
 }

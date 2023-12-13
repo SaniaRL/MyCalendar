@@ -1,6 +1,5 @@
 package GUI.DayPanel;
 
-import GUI.ColorSettings;
 import GUI.DayOfMonth;
 
 import javax.swing.*;
@@ -9,7 +8,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.time.LocalDate;
 
-public abstract class DayPanel extends JPanel implements BuildRestore {
+public abstract class DayPanel extends JPanel implements DetailSetter {
 
     protected LocalDate date;
     protected JLabel dateLabel;
@@ -31,8 +30,6 @@ public abstract class DayPanel extends JPanel implements BuildRestore {
     protected void buildPanel(){
         setOpaque(true);
         setLayout(new GridLayout(5, 1));
-        setBorder(border);
-
         setDateLabel();
         setVisible(true);
     }
@@ -50,16 +47,9 @@ public abstract class DayPanel extends JPanel implements BuildRestore {
     }
 
     @Override
-    public void addDetails(){
-        setBackground(backgroundColor);
-        dateLabel.setForeground(forefroundColor);
-    }
-
-    @Override
-    public void restore(){
+    public void setDetails(){
         setBorder(border);
         setBackground(backgroundColor);
         dateLabel.setForeground(forefroundColor);
     }
-
 }

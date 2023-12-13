@@ -80,7 +80,7 @@ public class CalendarFrame extends JFrame implements MonthViewParent {
         previousMonth = new JButton("<<");
         newPost = new JButton();
         account = new JButton();
-        icon = new ImageIcon("Icons/calendar.png");
+        icon = new ImageIcon("Icons/month.png");
         view = monthView;
 
         //Action Listeners
@@ -350,7 +350,7 @@ public class CalendarFrame extends JFrame implements MonthViewParent {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                SwingUtilities.invokeLater(()-> postFrame.buildFrame());
+                SwingUtilities.invokeLater(()-> postFrame.buildFrame(clickedPanel.getDate()));
             }
         });
     }
