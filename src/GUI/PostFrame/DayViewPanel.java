@@ -1,13 +1,15 @@
-package GUI.Post;
+package GUI.PostFrame;
 
 import GUI.ColorSettings;
+import GUI.FileManager;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.time.LocalDate;
 
-public class PostFrame extends JFrame {
+public class DayViewPanel extends JPanel {
+
     ColorSettings colorSettings;
     LocalDate date;
     ImageIcon icon;
@@ -19,31 +21,39 @@ public class PostFrame extends JFrame {
     JLabel dayLabel;
     JLabel monthYearLabel;
     JButton newPost;
+    JTextArea textArea;
+    JScrollPane scrollPane;
 
-    public PostFrame(ColorSettings colorSettings){
+    JButton save;
+    JButton back;
+    JButton category;
+
+    FileManager fileManager;
+
+    public DayViewPanel(ColorSettings colorSettings, LocalDate date){
         this.colorSettings = colorSettings;
+        this.date = date;
         icon = new ImageIcon("Icons/7.png");
         contentPanel = new JPanel(new BorderLayout());
         northPanel = new JPanel(new GridLayout(1, 3));
         centerPanel = new JPanel();
-        southPanel = new JPanel();
         dayLabel = new JLabel("", SwingConstants.CENTER);
         monthYearLabel = new JLabel();
         newPost = new JButton("+");
+        textArea = new JTextArea(100, 1);
+        scrollPane = new JScrollPane(textArea);
+        fileManager = FileManager.getInstance();
     }
 
-    public void buildFrame(LocalDate date){
-        this.date = date;
+    public void buildPanel(){
         setSize(new Dimension(400, 600));
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setIconImage(icon.getImage());
-        setResizable(false);
 
         contentPanel.setBackground(colorSettings.getColor());
         add(contentPanel);
 
         buildNorthPanel();
+        buildCenterPanel();
+        addActionListenerToButtons();
 
         setVisible(true);
     }
@@ -62,11 +72,48 @@ public class PostFrame extends JFrame {
         dayLabel.setText(date.getDayOfWeek().toString());
         monthYearLabel.setText(date.toString());
     }
+
+    public void buildCenterPanel(){
+        contentPanel.add(centerPanel, BorderLayout.CENTER);
+
+
+    }
+
     public void buildSouthPanel(){
+        southPanel = new JPanel(new GridLayout(1, 2));
         southPanel.setBackground(colorSettings.getWeekendBackgroundColor());
+        buildPostButtons();
+
+        save = new JButton("Save");
+        back = new JButton("Back");
+        category = new JButton("Category");
+
+        southPanel.add(save);
+        southPanel.add(back);
+        contentPanel.add(southPanel, BorderLayout.SOUTH);
+    }
+
+    public JButton buildOptionButtons(){
+        return new JButton();
     }
 
     public void buildPostButtons(){
 
+    }
+
+    public void addActionListenerToButtons() {
+        newPost.addActionListener(e -> openTextArea());
+
+    }
+
+    public void openTextArea(){
+        System.out.println("Open Text Area");
+        buildSouthPanel();
+
+        centerPanel.removeAll();
+        centerPanel.add(scrollPane);
+        scrollPane.setPreferredSize(new Dimension(380, 500));
+        centerPanel.repaint();
+        centerPanel.revalidate();
     }
 }

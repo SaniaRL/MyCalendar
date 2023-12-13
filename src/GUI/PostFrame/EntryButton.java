@@ -1,14 +1,9 @@
-package GUI.Post;
+package GUI.PostFrame;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Post extends JButton {
-
-    Category category;
-    public Post(Category category){
-        this.category = category;
-    }
+public class EntryButton extends JButton {
 
     public void buildPost(){
         setPreferredSize(new Dimension(200, 150));

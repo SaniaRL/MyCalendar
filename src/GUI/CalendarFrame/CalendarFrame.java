@@ -1,8 +1,8 @@
-package GUI.Frame;
+package GUI.CalendarFrame;
 
 import GUI.ColorSettings;
 import GUI.DayPanel.DayPanel;
-import GUI.Post.PostFrame;
+import GUI.PostFrame.PostFrame;
 import GUI.View.*;
 
 import javax.swing.*;
@@ -65,7 +65,7 @@ public class CalendarFrame extends JFrame implements MonthViewParent {
         colorSettings = new ColorSettings();
         date = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 1);
         menu = new Menu();
-        postFrame = new PostFrame(colorSettings);
+        postFrame = new PostFrame(colorSettings, date);
         colorSettings = new ColorSettings();
         contentPanel = new JPanel();
         northPanel = new JPanel();
@@ -350,7 +350,10 @@ public class CalendarFrame extends JFrame implements MonthViewParent {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                SwingUtilities.invokeLater(()-> postFrame.buildFrame(clickedPanel.getDate()));
+                SwingUtilities.invokeLater(()-> {
+                    postFrame.setDate(clickedPanel.getDate());
+                    postFrame.buildFrame();
+                });
             }
         });
     }
