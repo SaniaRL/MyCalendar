@@ -1,6 +1,9 @@
 package GUI;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileManager {
 
@@ -30,4 +33,15 @@ public class FileManager {
         return content;
     }
 
+    public List<String> checkIfData(List<String> paths, LocalDate date, String regex, int index) throws IOException {
+        List<String> data = new ArrayList<>();
+        for(String path : paths){
+            String content = readFromFile(path);
+            String[] fields = content.split(regex);
+            if(fields[index].equals(String.valueOf(date))){
+                data.add(content);
+            }
+        }
+        return data;
+    }
 }

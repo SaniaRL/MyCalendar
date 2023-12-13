@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MonthView extends JPanel implements CalendarStrategy {
+public class MonthView extends JPanel implements CalendarStrategy, MonthViewParent {
 
     ColorSettings colorSettings;
     LocalDate date;
@@ -69,7 +69,7 @@ public class MonthView extends JPanel implements CalendarStrategy {
                     super.mousePressed(e);
                     System.out.println(dayPanel.getDate());
                     clickedPanel = dayPanel;
-                    monthViewParent.panelClicked();
+                    panelClicked();
                     updateClickedDay();
                 }
             });
@@ -105,5 +105,10 @@ public class MonthView extends JPanel implements CalendarStrategy {
 
     public DayPanel getClickedPanel() {
         return clickedPanel;
+    }
+
+    @Override
+    public void panelClicked() {
+        monthViewParent.panelClicked();
     }
 }
