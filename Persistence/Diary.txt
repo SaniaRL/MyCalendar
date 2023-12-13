@@ -1,1 +1,2 @@
 2023-12-01;;Diary;;Klickade på en dag och skriver hallå!
+2023-12-01;;Diary;;Huehue

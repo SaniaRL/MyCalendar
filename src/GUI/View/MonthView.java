@@ -54,7 +54,7 @@ public class MonthView extends JPanel implements CalendarStrategy {
     }
 
     @Override
-    public void changeDetails(){
+    public void setDetails(){
         createView();
         addActionListersToDays();
         repaint();
@@ -79,18 +79,10 @@ public class MonthView extends JPanel implements CalendarStrategy {
     public void updateClickedDay(){
         resetDayPanels();
         switch (colorSettings.getColorScheme()){
-            case "Grey" -> {
-                dayPanelDecorator = new DefaultPanelDecorator(clickedPanel);
-            }
-            case "Green" -> {
-                dayPanelDecorator = new GreenPanelDecorator(clickedPanel);
-            }
-            case "Pink" -> {
-                dayPanelDecorator = new PinkPanelDecorator(clickedPanel);
-            }
-            case "Ugly" -> {
-                dayPanelDecorator = new UglyPanelDecorator(clickedPanel);
-            }
+            case "Grey" -> dayPanelDecorator = new DefaultPanelDecorator(clickedPanel);
+            case "Green" -> dayPanelDecorator = new GreenPanelDecorator(clickedPanel);
+            case "Pink" -> dayPanelDecorator = new PinkPanelDecorator(clickedPanel);
+            case "Ugly" -> dayPanelDecorator = new UglyPanelDecorator(clickedPanel);
         }
         clickedPanel.repaint();
         clickedPanel.revalidate();
@@ -113,10 +105,5 @@ public class MonthView extends JPanel implements CalendarStrategy {
 
     public DayPanel getClickedPanel() {
         return clickedPanel;
-    }
-
-    public void updateClickedLabel(){
-        clickedPanel.repaint();
-        clickedPanel.revalidate();
     }
 }

@@ -9,10 +9,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class CreatePostPanel extends ReadEntryPanel {
-
-    ColorSettings colorSettings;
-    LocalDate date;
+public class CreatePostPanel extends EntryPanel {
 
     JPanel northPanel;
     JPanel centerPanel;
@@ -23,17 +20,14 @@ public class CreatePostPanel extends ReadEntryPanel {
     JButton save;
     JButton back;
 
-//    FileManager fileManager;
     String regex;
 
     public CreatePostPanel(ColorSettings colorSettings, LocalDate date){
-        this.colorSettings = colorSettings;
-        this.date = date;
+        super(colorSettings, date);
         northPanel = new JPanel(new GridLayout(1, 3));
         centerPanel = new JPanel();
         textArea = new JTextArea(100, 1);
         scrollPane = new JScrollPane(textArea);
-//        fileManager = FileManager.getInstance();
         regex = ";;";
 
         buildPanel();

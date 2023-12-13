@@ -260,12 +260,12 @@ public class CalendarFrame extends JFrame implements MonthViewParent {
 
         if(view.equals(monthView)){
             monthView.setDate(date);
-            monthView.changeDetails();
+            monthView.setDetails();
             System.out.println("Change details in Frame : monthView");
         }
         if(view.equals(dayView)){
             dayView.setDate(date);
-            dayView.changeDetails();
+            dayView.setDetails();
             System.out.println("Change details in Frame : dayView");
         }
         repaint();

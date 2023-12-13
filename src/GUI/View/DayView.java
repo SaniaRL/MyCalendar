@@ -44,7 +44,7 @@ public class DayView extends JPanel implements CalendarStrategy {
     }
 
     @Override
-    public void changeDetails() {
+    public void setDetails() {
         createView();
         repaint();
         revalidate();
