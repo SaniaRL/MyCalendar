@@ -1,8 +1,6 @@
 package GUI.PostFrame;
 
 import GUI.ColorSettings;
-import GUI.FileManager;
-import GUI.FileOperation;
 import GUI.FileOperationType;
 
 import javax.swing.*;
@@ -11,7 +9,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class CreatePostPanel extends JPanel implements FileOperation {
+public class CreatePostPanel extends ReadEntryPanel {
 
     ColorSettings colorSettings;
     LocalDate date;
@@ -25,7 +23,7 @@ public class CreatePostPanel extends JPanel implements FileOperation {
     JButton save;
     JButton back;
 
-    FileManager fileManager;
+//    FileManager fileManager;
     String regex;
 
     public CreatePostPanel(ColorSettings colorSettings, LocalDate date){
@@ -35,7 +33,7 @@ public class CreatePostPanel extends JPanel implements FileOperation {
         centerPanel = new JPanel();
         textArea = new JTextArea(100, 1);
         scrollPane = new JScrollPane(textArea);
-        fileManager = FileManager.getInstance();
+//        fileManager = FileManager.getInstance();
         regex = ";;";
 
         buildPanel();

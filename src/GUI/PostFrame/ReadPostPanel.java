@@ -2,5 +2,5 @@ package GUI.PostFrame;
 
 import javax.swing.*;
 
-public class ReadPostPanel extends JPanel {
+public class ReadPostPanel extends ReadEntryPanel {
 }
