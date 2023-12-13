@@ -20,6 +20,8 @@ public class PostFrame extends JFrame {
     JLabel monthYearLabel;
     JButton newPost;
 
+    FileManager fileManager;
+
     public PostFrame(ColorSettings colorSettings){
         this.colorSettings = colorSettings;
         icon = new ImageIcon("Icons/7.png");
@@ -30,6 +32,7 @@ public class PostFrame extends JFrame {
         dayLabel = new JLabel("", SwingConstants.CENTER);
         monthYearLabel = new JLabel();
         newPost = new JButton("+");
+        fileManager = FileManager.getInstance();
     }
 
     public void buildFrame(LocalDate date){
@@ -44,6 +47,7 @@ public class PostFrame extends JFrame {
         add(contentPanel);
 
         buildNorthPanel();
+        buildSouthPanel();
 
         setVisible(true);
     }
@@ -64,6 +68,7 @@ public class PostFrame extends JFrame {
     }
     public void buildSouthPanel(){
         southPanel.setBackground(colorSettings.getWeekendBackgroundColor());
+        buildPostButtons();
     }
 
     public void buildPostButtons(){
