@@ -1,4 +1,4 @@
-package GUI.CalendarEntry;
+package GUI.Frame;
 
 import javax.swing.*;
 import java.awt.*;

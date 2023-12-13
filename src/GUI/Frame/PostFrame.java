@@ -1,5 +1,6 @@
-package GUI.CalendarEntry;
+package GUI.Frame;
 
+import GUI.FileManager;
 import GUI.ColorSettings;
 
 import javax.swing.*;
@@ -22,6 +23,10 @@ public class PostFrame extends JFrame {
     JTextArea textArea;
     JScrollPane scrollPane;
 
+    JButton save;
+    JButton back;
+    JButton category;
+
     FileManager fileManager;
 
     public PostFrame(ColorSettings colorSettings){
@@ -30,7 +35,6 @@ public class PostFrame extends JFrame {
         contentPanel = new JPanel(new BorderLayout());
         northPanel = new JPanel(new GridLayout(1, 3));
         centerPanel = new JPanel();
-        southPanel = new JPanel();
         dayLabel = new JLabel("", SwingConstants.CENTER);
         monthYearLabel = new JLabel();
         newPost = new JButton("+");
@@ -75,13 +79,21 @@ public class PostFrame extends JFrame {
     public void buildCenterPanel(){
         contentPanel.add(centerPanel, BorderLayout.CENTER);
 
-        southPanel.setBackground(colorSettings.getWeekendBackgroundColor());
-        buildPostButtons();
 
     }
 
     public void buildSouthPanel(){
+        southPanel = new JPanel(new GridLayout(1, 2));
+        southPanel.setBackground(colorSettings.getWeekendBackgroundColor());
+        buildPostButtons();
 
+        save = new JButton("Save");
+        back = new JButton("Back");
+        category = new JButton("Category");
+
+        southPanel.add(save);
+        southPanel.add(back);
+        contentPanel.add(southPanel, BorderLayout.SOUTH);
     }
 
     public JButton buildOptionButtons(){

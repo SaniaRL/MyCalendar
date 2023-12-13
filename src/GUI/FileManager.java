@@ -1,4 +1,4 @@
-package GUI.CalendarEntry;
+package GUI;
 
 import java.io.*;
 
