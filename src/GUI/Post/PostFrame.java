@@ -19,6 +19,8 @@ public class PostFrame extends JFrame {
     JLabel dayLabel;
     JLabel monthYearLabel;
     JButton newPost;
+    JTextArea textArea;
+    JScrollPane scrollPane;
 
     FileManager fileManager;
 
@@ -32,6 +34,8 @@ public class PostFrame extends JFrame {
         dayLabel = new JLabel("", SwingConstants.CENTER);
         monthYearLabel = new JLabel();
         newPost = new JButton("+");
+        textArea = new JTextArea(100, 1);
+        scrollPane = new JScrollPane(textArea);
         fileManager = FileManager.getInstance();
     }
 
@@ -47,7 +51,8 @@ public class PostFrame extends JFrame {
         add(contentPanel);
 
         buildNorthPanel();
-        buildSouthPanel();
+        buildCenterPanel();
+        addActionListenerToButtons();
 
         setVisible(true);
     }
@@ -66,12 +71,40 @@ public class PostFrame extends JFrame {
         dayLabel.setText(date.getDayOfWeek().toString());
         monthYearLabel.setText(date.toString());
     }
-    public void buildSouthPanel(){
+
+    public void buildCenterPanel(){
+        contentPanel.add(centerPanel, BorderLayout.CENTER);
+
         southPanel.setBackground(colorSettings.getWeekendBackgroundColor());
         buildPostButtons();
+
+    }
+
+    public void buildSouthPanel(){
+
+    }
+
+    public JButton buildOptionButtons(){
+        return new JButton();
     }
 
     public void buildPostButtons(){
 
+    }
+
+    public void addActionListenerToButtons() {
+        newPost.addActionListener(e -> openTextArea());
+
+    }
+
+    public void openTextArea(){
+        System.out.println("Open Text Area");
+        buildSouthPanel();
+
+        centerPanel.removeAll();
+        centerPanel.add(scrollPane);
+        scrollPane.setPreferredSize(new Dimension(380, 500));
+        centerPanel.repaint();
+        centerPanel.revalidate();
     }
 }
