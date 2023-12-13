@@ -31,7 +31,7 @@ public class WeekView extends JPanel implements CalendarStrategy {
 
     @Override
     public void createView() {
-
+        //TODO write code
     }
 
     @Override

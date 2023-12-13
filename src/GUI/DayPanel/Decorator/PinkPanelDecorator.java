@@ -1,6 +1,5 @@
 package GUI.DayPanel.Decorator;
 
-import GUI.ColorSettings;
 import GUI.DayPanel.DayPanel;
 
 import javax.swing.border.LineBorder;

@@ -1,6 +1,5 @@
 package GUI.DayPanel.Decorator;
 
-import GUI.ColorSettings;
 import GUI.DayPanel.DayPanel;
 
 import javax.swing.border.LineBorder;
@@ -15,7 +14,7 @@ public class GreenPanelDecorator extends DefaultPanelDecorator {
 
     @Override
     public void setColor(){
-        dayPanel.setBackground(new Color(80, 255, 80));
+        dayPanel.setBackground(new Color(10, 240, 10));
         dayPanel.setBorder(new LineBorder(new Color(10, 200, 10)));
     }
 }

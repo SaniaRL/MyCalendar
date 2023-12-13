@@ -98,7 +98,7 @@ public class MonthView extends JPanel implements CalendarStrategy {
 
     public void resetDayPanels(){
         for(DayPanel dayPanel : dayPanelList){
-            dayPanel.restore();
+            dayPanel.setDetails();
         }
     }
 
