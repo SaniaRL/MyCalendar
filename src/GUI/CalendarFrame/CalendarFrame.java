@@ -14,7 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 
-public class CalendarFrame extends JFrame implements MonthViewParent {
+public class CalendarFrame extends JFrame {
 
     //Frames
     PostFrame postFrame;
@@ -70,7 +70,7 @@ public class CalendarFrame extends JFrame implements MonthViewParent {
         contentPanel = new JPanel();
         northPanel = new JPanel();
         //I want to use method Update GUI here it there is a call back
-        monthView = new MonthView(colorSettings, date, this);
+        monthView = new MonthView(colorSettings, date, this::panelClicked);
         weekView = new WeekView(colorSettings, date);
         dayView = new DayView(colorSettings, date);
         eastPanel = new JPanel();
@@ -343,7 +343,6 @@ public class CalendarFrame extends JFrame implements MonthViewParent {
         revalidate();
     }
 
-    //TODO UPDATE PANEL LIST
     public void panelClicked() {
         clickedPanel = monthView.getClickedPanel();
         clickedPanel.addMouseListener(new MouseAdapter() {

@@ -5,7 +5,7 @@ import GUI.DayPanel.DayPanel;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
-public class GreenPanelDecorator extends DefaultPanelDecorator {
+public class GreenPanelDecorator extends DayPanelDecorator {
 
     public GreenPanelDecorator(DayPanel dayPanel){
         super(dayPanel);
