@@ -1,10 +1,8 @@
 package GUI.PostFrame;
 
-import GUI.FileManager;
 import GUI.ColorSettings;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.time.LocalDate;
 
@@ -16,16 +14,16 @@ public class PostFrame extends JFrame {
     JPanel contentPanel;
     CreatePostPanel createPostPanel;
 
-    public PostFrame(ColorSettings colorSettings){
+    public PostFrame(ColorSettings colorSettings, LocalDate date){
         this.colorSettings = colorSettings;
+        this.date = date;
         icon = new ImageIcon("Icons/7.png");
         contentPanel = new JPanel(new BorderLayout());
 
         createPostPanel = new CreatePostPanel(colorSettings, date);
     }
 
-    public void buildFrame(LocalDate date){
-        this.date = date;
+    public void buildFrame(){
         setSize(new Dimension(400, 600));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -47,5 +45,9 @@ public class PostFrame extends JFrame {
         add(contentPanel);
 
         setVisible(true);
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

@@ -2,13 +2,16 @@ package GUI.PostFrame;
 
 import GUI.ColorSettings;
 import GUI.FileManager;
+import GUI.FileOperation;
+import GUI.FileOperationType;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.io.IOException;
 import java.time.LocalDate;
 
-public class CreatePostPanel extends JPanel {
+public class CreatePostPanel extends JPanel implements FileOperation {
 
     ColorSettings colorSettings;
     LocalDate date;
@@ -23,6 +26,7 @@ public class CreatePostPanel extends JPanel {
     JButton back;
 
     FileManager fileManager;
+    String regex;
 
     public CreatePostPanel(ColorSettings colorSettings, LocalDate date){
         this.colorSettings = colorSettings;
@@ -32,6 +36,7 @@ public class CreatePostPanel extends JPanel {
         textArea = new JTextArea(100, 1);
         scrollPane = new JScrollPane(textArea);
         fileManager = FileManager.getInstance();
+        regex = ";;";
 
         buildPanel();
     }
@@ -74,7 +79,42 @@ public class CreatePostPanel extends JPanel {
         add(southPanel, BorderLayout.SOUTH);
     }
 
-    public void addActionListenerToButtons() {
+    public void saveToFile(String dateString, String category, String content) {
 
+
+        String entry = "Hej jag är en apa";
+
+        try{
+            fileManager.writeToFile("Persistence/Diary.txt", entry);
+        }catch (IOException e){
+            System.out.println("Error");
+        }
+    }
+
+    public boolean checkIfTextContainsRegex(String text){
+        boolean containsRegex = true;
+        if(!text.contains(regex)){
+            return false;
+        }
+        return containsRegex;
+    }
+
+    //TODO make sure it's not only diary
+
+    public void addActionListenerToButtons() {
+        save.addActionListener(e -> fileOperations(FileOperationType.WRITE));
+
+    }
+    @Override
+    public void fileOperations(FileOperationType fileOperationType){
+        String dateString = String.valueOf(date);
+        String category = "Diary";
+        String content = textArea.getText();
+
+        switch (fileOperationType){
+            case READ -> System.out.println("READ");
+            case WRITE -> saveToFile(dateString, category, content);
+            case ACCESS -> System.out.println("ACCESS");
+        }
     }
 }
