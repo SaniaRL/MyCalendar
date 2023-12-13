@@ -2,7 +2,7 @@ package GUI.Frame;
 
 import GUI.ColorSettings;
 import GUI.DayPanel.DayPanel;
-import GUI.Post.PostFrame;
+import GUI.CalendarEntry.PostFrame;
 import GUI.View.*;
 
 import javax.swing.*;

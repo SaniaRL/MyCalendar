@@ -1,4 +1,4 @@
-package GUI.Post;
+package GUI.CalendarEntry;
 
 import GUI.ColorSettings;
 
