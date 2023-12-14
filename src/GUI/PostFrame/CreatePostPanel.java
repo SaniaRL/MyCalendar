@@ -26,7 +26,7 @@ public class CreatePostPanel extends EntryPanel {
         super(colorSettings, date);
         northPanel = new JPanel(new GridLayout(1, 3));
         centerPanel = new JPanel();
-        textArea = new JTextArea(100, 1);
+        textArea = new JTextArea(100, 20);
         scrollPane = new JScrollPane(textArea);
         regex = ";;";
 
@@ -50,6 +50,9 @@ public class CreatePostPanel extends EntryPanel {
         northPanel.setBorder(new LineBorder(colorSettings.getBorderColor()));
 
         centerPanel.add(scrollPane);
+        textArea.setLineWrap(true);
+        textArea.setFont(new Font("Sans Serif", Font.PLAIN, 22));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setPreferredSize(new Dimension(380, 500));
 
         add(northPanel, BorderLayout.NORTH);

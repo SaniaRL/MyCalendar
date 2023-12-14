@@ -15,13 +15,6 @@ public class PostFrame extends JFrame {
     CreatePostPanel createPostPanel;
 
     CardLayout cardLayout;
-/*    DayViewPanelParent dayViewPanelParent = () -> {
-        cardLayout.show(contentPanel, "CreatePost");
-        contentPanel.repaint();
-        contentPanel.revalidate();
-    };
-
- */
 
     public PostFrame(ColorSettings colorSettings, LocalDate date){
         this.colorSettings = colorSettings;

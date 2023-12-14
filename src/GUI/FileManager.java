@@ -25,15 +25,14 @@ public class FileManager {
     }
 
     public String readFromFile(String path) throws IOException {
-        String content = "";
+        String content;
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(path))){
             content = bufferedReader.readLine();
         }
-
         return content;
     }
 
-    public List<String> checkIfData(List<String> paths, LocalDate date, String regex, int index) throws IOException {
+    public List<String> getDataByDate(List<String> paths, LocalDate date, String regex, int index) throws IOException {
         List<String> data = new ArrayList<>();
         for(String path : paths){
             String content = readFromFile(path);

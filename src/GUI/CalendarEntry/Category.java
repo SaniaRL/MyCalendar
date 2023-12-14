@@ -12,4 +12,16 @@ public class Category {
         this.path = path;
         this.color = color;
     }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public Color getColor() {
+        return color;
+    }
 }

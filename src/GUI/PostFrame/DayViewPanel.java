@@ -1,25 +1,32 @@
 package GUI.PostFrame;
 
+import GUI.CalendarEntry.Category;
 import GUI.ColorSettings;
+import GUI.FileOperation;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.time.LocalDate;
 
-public class DayViewPanel extends EntryPanel implements DayViewPanelParent {
+public class DayViewPanel extends EntryPanel implements DayViewPanelParent, FileOperation {
 
     ImageIcon icon;
 
     JPanel northPanel;
     JPanel centerPanel;
-    JPanel southPanel;
     JLabel dayLabel;
     JLabel monthYearLabel;
     JButton newPost;
 
-    JButton category;
+    List<Category> categoryList;
+    Category category;
 
+    //TODO make sure regex does not exist in different classes
+    String regex;
     DayViewPanelParent parent;
 
     public DayViewPanel(ColorSettings colorSettings, LocalDate date, DayViewPanelParent dayViewPanelParent){
@@ -31,6 +38,11 @@ public class DayViewPanel extends EntryPanel implements DayViewPanelParent {
         dayLabel = new JLabel("", SwingConstants.CENTER);
         monthYearLabel = new JLabel();
         newPost = new JButton("+");
+        category = new Category("Diary", "Diary.txt", new Color(175, 102, 250));
+        //TODO Get by method from other class that holds the Categories
+        categoryList = new ArrayList<>();
+        categoryList.add(category);
+        regex = ";;";
 
         buildPanel();
     }
@@ -66,17 +78,22 @@ public class DayViewPanel extends EntryPanel implements DayViewPanelParent {
         add(centerPanel, BorderLayout.CENTER);
     }
 
-    public void buildSouthPanel(){
-        southPanel = new JPanel(new GridLayout(1, 2));
-        southPanel.setBackground(colorSettings.getWeekendBackgroundColor());
-        buildPostButtons();
+    public void buildPostButtons() throws IOException {
+        List<String> categoryPaths = new ArrayList<>();
+        for(Category categoryTemp : categoryList){
+            categoryPaths.add(categoryTemp.getPath());
+        }
 
-        category = new JButton("Category");
+        try{
+            List<String> data = fileManager.getDataByDate(categoryPaths, date, regex, 0);
+            if(!data.isEmpty()){
+                for(String postData : data){
 
-        add(southPanel, BorderLayout.SOUTH);
-    }
-    public void buildPostButtons(){
-
+                }
+            }
+        }catch (IOException e){
+            System.out.println("IOException");
+        }
     }
 
     public void addActionListenerToButtons() {
