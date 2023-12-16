@@ -3,6 +3,7 @@ package GUI.PostFrame;
 import GUI.CalendarEntry.Category;
 import GUI.ColorSettings;
 import GUI.FileOperation;
+import GUI.FileOperationType;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -103,5 +104,10 @@ public class DayViewPanel extends EntryPanel implements DayViewPanelParent, File
     @Override
     public void buttonClicked() {
         parent.buttonClicked();
+    }
+
+    @Override
+    public void fileOperation(FileOperationType fileOperationType) {
+
     }
 }

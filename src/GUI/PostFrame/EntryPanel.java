@@ -21,4 +21,6 @@ public abstract class EntryPanel extends JPanel implements FileOperation {
     public void fileOperations(FileOperationType fileOperationType) {
 
     }
+
+    public abstract void fileOperation(FileOperationType fileOperationType);
 }

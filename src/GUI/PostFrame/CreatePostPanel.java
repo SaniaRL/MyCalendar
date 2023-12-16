@@ -119,4 +119,9 @@ public class CreatePostPanel extends EntryPanel {
             case ACCESS -> System.out.println("ACCESS");
         }
     }
+
+    @Override
+    public void fileOperation(FileOperationType fileOperationType) {
+        System.out.println("CreatePostPanel::fileOperation");
+    }
 }

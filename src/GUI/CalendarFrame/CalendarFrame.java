@@ -212,18 +212,18 @@ public class CalendarFrame extends JFrame {
 
     public void buildSidePanels(){
 
-        buildChangeMonthButton(nextMonth, 1);
+        buildNavigationButton(nextMonth, 1);
         eastPanel.add(nextMonth);
         eastPanel.setOpaque(false);
         contentPanel.add(eastPanel, BorderLayout.EAST);
 
-        buildChangeMonthButton(previousMonth, -1);
+        buildNavigationButton(previousMonth, -1);
         westPanel.add(previousMonth);
         westPanel.setOpaque(false);
         contentPanel.add(westPanel, BorderLayout.WEST);
     }
 
-    public void buildChangeMonthButton(JButton button, int i){
+    public void buildNavigationButton(JButton button, int i){
         button.setPreferredSize(new Dimension(50, this.getHeight() - 300));
         button.setBackground(colorSettings.getEmptyBackgroundColor());
         button.setBorder(new LineBorder(colorSettings.getBorderColor(), 3));
@@ -232,7 +232,6 @@ public class CalendarFrame extends JFrame {
             button.removeActionListener(actionListener);
         }
 
-        System.out.println("Build button: " + i);
         button.addActionListener(e -> {
             if(view == monthView){
                 date = date.plusMonths(i);
@@ -247,8 +246,6 @@ public class CalendarFrame extends JFrame {
         });
     }
 
-
-
     public void buildSouthPanel(){
         southPanel.setOpaque(false);
         JLabel info = new JLabel(" Sania Runnfors Larsson");
@@ -261,12 +258,10 @@ public class CalendarFrame extends JFrame {
         if(view.equals(monthView)){
             monthView.setDate(date);
             monthView.setDetails();
-            System.out.println("Change details in Frame : monthView");
         }
         if(view.equals(dayView)){
             dayView.setDate(date);
             dayView.setDetails();
-            System.out.println("Change details in Frame : dayView");
         }
         repaint();
         revalidate();

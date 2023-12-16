@@ -61,6 +61,11 @@ public class MonthView extends JPanel implements CalendarStrategy, MonthViewPare
         revalidate();
     }
 
+    @Override
+    public void panelClicked() {
+        monthViewParent.panelClicked();
+    }
+
     public void addActionListersToDays(){
         for(DayPanel dayPanel : dayPanelList){
             dayPanel.addMouseListener(new MouseAdapter() {
@@ -107,8 +112,5 @@ public class MonthView extends JPanel implements CalendarStrategy, MonthViewPare
         return clickedPanel;
     }
 
-    @Override
-    public void panelClicked() {
-        monthViewParent.panelClicked();
-    }
+
 }

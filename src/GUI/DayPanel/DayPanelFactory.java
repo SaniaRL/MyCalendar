@@ -6,7 +6,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class DayPanelFactory {
-    public DayPanel createDayPanel(boolean currentMonth, LocalDate date, ColorSettings colorSettings){
+    public DayPanel createDayPanel(boolean currentMonth, LocalDate date, ColorSettings colorSettings) {
         if(!currentMonth){
             return new OutsideMonthPanel(date, colorSettings);
         }
