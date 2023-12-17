@@ -2,8 +2,8 @@ package GUI.PostFrame;
 
 import GUI.CalendarEntry.Category;
 import GUI.ColorSettings;
-import GUI.FileOperation;
-import GUI.FileOperationType;
+import FileManager.FileOperation;
+import FileManager.FileOperationType;
 
 import java.io.IOException;
 import java.util.ArrayList;

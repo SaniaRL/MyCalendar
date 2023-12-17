@@ -1,6 +1,6 @@
 package GUI.CalendarEntry;
 
-import GUI.FileOperationType;
+import FileManager.FileOperationType;
 
 import java.awt.*;
 import java.time.LocalDate;

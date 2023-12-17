@@ -1,4 +1,4 @@
-package GUI;
+package FileManager;
 
 import java.io.*;
 import java.time.LocalDate;

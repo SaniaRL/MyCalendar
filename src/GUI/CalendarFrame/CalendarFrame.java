@@ -91,7 +91,7 @@ public class CalendarFrame extends JFrame {
         addActionListenersToMenu();
     }
 
-    private void buildFrame(){
+    public void buildFrame(){
         setSize(new Dimension(1000, 600));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -169,7 +169,6 @@ public class CalendarFrame extends JFrame {
 
     public void buildNorthPanelButtons(JButton button, String text){
         button.setText(text);
-//        button.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         button.setBackground(colorSettings.getBorderColor());
         button.setPreferredSize(new Dimension(50,50));
     }
@@ -240,18 +239,6 @@ public class CalendarFrame extends JFrame {
             monthLabel.setText(String.valueOf(date.getMonth()));
             yearLabel.setText(String.valueOf(date.getYear()));
 
-          /*  if(view == monthView){
-                date = date.plusMonths(i);
-            }
-            else if(view == dayView){
-                date = date.plusDays(i);
-            }
-            else if(view == weekView){
-                date = date.plusDays(i * 7L);
-            }
-
-           */
-//            changeDetails();
         });
     }
 
@@ -263,7 +250,7 @@ public class CalendarFrame extends JFrame {
     }
 
     public void addActionListenersToMenu(){
-        //View Menu
+        //GUI.View Menu
         menu.month.addActionListener(e -> {
             view = monthView;
             updateGUI();

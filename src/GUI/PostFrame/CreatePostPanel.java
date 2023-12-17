@@ -1,7 +1,7 @@
 package GUI.PostFrame;
 
 import GUI.ColorSettings;
-import GUI.FileOperationType;
+import FileManager.FileOperationType;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

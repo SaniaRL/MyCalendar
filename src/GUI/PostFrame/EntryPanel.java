@@ -1,8 +1,8 @@
 package GUI.PostFrame;
 
 import GUI.ColorSettings;
-import GUI.FileOperation;
-import GUI.FileOperationType;
+import FileManager.FileOperation;
+import FileManager.FileOperationType;
 
 import javax.swing.*;
 import java.time.LocalDate;
