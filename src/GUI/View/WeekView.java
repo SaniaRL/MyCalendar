@@ -3,6 +3,7 @@ package GUI.View;
 import GUI.ColorSettings;
 
 import javax.swing.*;
+import java.awt.*;
 import java.time.LocalDate;
 
 public class WeekView extends JPanel implements CalendarStrategy {
@@ -29,14 +30,23 @@ public class WeekView extends JPanel implements CalendarStrategy {
         createView();
     }
 
-    @Override
     public void createView() {
-        //TODO write code
+        setLayout(new BorderLayout());
     }
 
     @Override
     public void setDetails() {
 
+    }
+
+    @Override
+    public void navigate(int i) {
+        date = date.plusDays(i * 7L);
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return date;
     }
 
     public void setColorSettings(ColorSettings colorSettings) {

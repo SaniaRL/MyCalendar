@@ -233,7 +233,14 @@ public class CalendarFrame extends JFrame {
         }
 
         button.addActionListener(e -> {
-            if(view == monthView){
+            view.navigate(i);
+            view.setDetails();
+            date = view.getDate();
+
+            monthLabel.setText(String.valueOf(date.getMonth()));
+            yearLabel.setText(String.valueOf(date.getYear()));
+
+          /*  if(view == monthView){
                 date = date.plusMonths(i);
             }
             else if(view == dayView){
@@ -242,7 +249,9 @@ public class CalendarFrame extends JFrame {
             else if(view == weekView){
                 date = date.plusDays(i * 7L);
             }
-            changeDetails();
+
+           */
+//            changeDetails();
         });
     }
 
@@ -251,25 +260,6 @@ public class CalendarFrame extends JFrame {
         JLabel info = new JLabel(" Sania Runnfors Larsson");
         southPanel.add(info);
         contentPanel.add(southPanel, BorderLayout.SOUTH);
-    }
-
-    public void changeDetails(){
-
-        if(view.equals(monthView)){
-            monthView.setDate(date);
-            monthView.setDetails();
-        }
-        if(view.equals(dayView)){
-            dayView.setDate(date);
-            dayView.setDetails();
-        }
-        repaint();
-        revalidate();
-
-        monthLabel.setText(String.valueOf(date.getMonth()));
-        yearLabel.setText(String.valueOf(date.getYear()));
-        repaint();
-        revalidate();
     }
 
     public void addActionListenersToMenu(){

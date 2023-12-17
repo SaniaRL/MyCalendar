@@ -36,7 +36,6 @@ public class MonthView extends JPanel implements CalendarStrategy, MonthViewPare
         addActionListersToDays();
     }
 
-    @Override
     public void createView(){
         removeAll();
         if(!dayPanelList.isEmpty()){
@@ -53,12 +52,16 @@ public class MonthView extends JPanel implements CalendarStrategy, MonthViewPare
         }
     }
 
-    @Override
     public void setDetails(){
         createView();
         addActionListersToDays();
         repaint();
         revalidate();
+    }
+
+    @Override
+    public void navigate(int i) {
+        date = date.plusMonths(i);
     }
 
     @Override
@@ -112,5 +115,8 @@ public class MonthView extends JPanel implements CalendarStrategy, MonthViewPare
         return clickedPanel;
     }
 
-
+    @Override
+    public LocalDate getDate() {
+        return date;
+    }
 }
