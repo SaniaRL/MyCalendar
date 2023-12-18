@@ -54,12 +54,12 @@ public class CalendarFrame extends JFrame {
     private ColorSettings colorSettings;
 
 
-
-    //TODO Remove Main
-    public static void main(String[] args){
+/*    public static void main(String[] args){
         @SuppressWarnings("unused")
         CalendarFrame calendarFrame = new CalendarFrame();
     }
+
+ */
 
     public CalendarFrame(){
         colorSettings = new ColorSettings();
@@ -85,13 +85,13 @@ public class CalendarFrame extends JFrame {
 
         //Action Listeners
 
-        buildFrame();
+//        buildFrame();
         buildSidePanels();
         setJMenuBar(menu);
         addActionListenersToMenu();
     }
 
-    public void buildFrame(){
+    public void buildFrame(CalendarStrategy calendarStrategy){
         setSize(new Dimension(1000, 600));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -103,27 +103,38 @@ public class CalendarFrame extends JFrame {
         contentPanel.setOpaque(true);
         contentPanel.setVisible(true);
 
-        //Build panels
         buildNorthPanel();
-        contentPanel.add(northPanel, BorderLayout.NORTH);
         buildSouthPanel();
-
-        //Add views
-        if(view == monthView){
-            contentPanel.add(monthView, BorderLayout.CENTER);
-        }
-        else if(view == weekView){
-            contentPanel.add(weekView, BorderLayout.CENTER);
-        }
-        else if(view == dayView){
-            contentPanel.add(dayView, BorderLayout.CENTER);
-        }
-
-        //Add menu & Set action Listener to menu
+        buildSidePanels();
 
         add(contentPanel);
         setVisible(true);
     }
+//TODO code for facade
+    public void buildCalendar(){
+        setSize(new Dimension(1000, 600));
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setTitle("MyCalendar");
+        setIconImage(icon.getImage());
+    }
+
+    public void setView(CalendarStrategy calendarStrategy){
+        view = calendarStrategy;
+        if(view instanceof MonthView){
+            contentPanel.add(monthView, BorderLayout.CENTER);
+        }
+        else if(view instanceof WeekView){
+            contentPanel.add(weekView, BorderLayout.CENTER);
+        }
+        else if(view instanceof DayView){
+            contentPanel.add(dayView, BorderLayout.CENTER);
+        }
+        repaint();
+        revalidate();
+    }
+
+    //TODO done
 
     public void buildNorthPanel() {
         //Weekdays, Month or Year info.
@@ -165,6 +176,7 @@ public class CalendarFrame extends JFrame {
         middlePanel.add(yearLabel);
 
         buildWeekPanel();
+        contentPanel.add(northPanel, BorderLayout.NORTH);
     }
 
     public void buildNorthPanelButtons(JButton button, String text){
@@ -286,31 +298,30 @@ public class CalendarFrame extends JFrame {
     }
 
     public void updateGUI(){
-        if(view == monthView){
+        if(view instanceof MonthView){
             contentPanel.remove(dayView);
             contentPanel.remove(weekView);
             monthView.setColorSettings(colorSettings);
         }
-        if(view == weekView){
+        if(view instanceof WeekView){
             contentPanel.remove(monthView);
             contentPanel.remove(weekView);
             weekView.setColorSettings(colorSettings);
             contentPanel.add(weekView, BorderLayout.CENTER);
         }
-        if(view == dayView){
+        if(view instanceof DayView){
             contentPanel.remove(monthView);
             contentPanel.remove(weekView);
             dayView.setColorSettings(colorSettings);
             contentPanel.add(dayView, BorderLayout.CENTER);
         }
-        System.out.println("UpdateGUI");
-        contentPanel.removeAll();
-        northPanel.removeAll();
-        southPanel.removeAll();
-        buildFrame();
-        buildSidePanels();
-        setJMenuBar(menu);
-        addActionListenersToMenu();
+//        contentPanel.removeAll();
+//        northPanel.removeAll();
+//        southPanel.removeAll();
+//        buildFrame(monthView);
+//        buildSidePanels();
+//        setJMenuBar(menu);
+//        addActionListenersToMenu();
         repaint();
         revalidate();
     }
