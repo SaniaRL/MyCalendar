@@ -6,16 +6,8 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class PinkPanelDecorator extends DayPanelDecorator {
-
     public PinkPanelDecorator(DayPanel dayPanel){
-        super(dayPanel);
+        super(dayPanel, new Color(255, 155, 185), new Color(120, 30, 50));
         setColor();
     }
-
-    @Override
-    public void setColor(){
-        dayPanel.setBackground(new Color(255, 155, 185));
-        dayPanel.setBorder(new LineBorder(new Color(120, 30, 50)));
-    }
-
 }
