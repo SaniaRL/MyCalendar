@@ -40,14 +40,14 @@ public class CalendarFrame extends JFrame {
     //Buttons
     private final JButton nextMonth;
     private final JButton previousMonth;
-    private final JButton newPost;
-    private final JButton account;
+//    private final JButton newPost;
+//    private final JButton account;
 
     //Dates
     LocalDate date;
 
     //Menus
-    Menu menu;
+//    Menu menu;
 
     //Paths
     private final ImageIcon icon;
@@ -64,7 +64,7 @@ public class CalendarFrame extends JFrame {
     public CalendarFrame(){
         colorSettings = new ColorSettings();
         date = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 1);
-        menu = new Menu();
+//        menu = new Menu();
         postFrame = new PostFrame(colorSettings, date);
         colorSettings = new ColorSettings();
         contentPanel = new JPanel(new BorderLayout());
@@ -78,8 +78,8 @@ public class CalendarFrame extends JFrame {
         southPanel = new JPanel();
         nextMonth = new JButton(">>");
         previousMonth = new JButton("<<");
-        newPost = new JButton();
-        account = new JButton();
+//        newPost = new JButton();
+//        account = new JButton();
         icon = new ImageIcon("Icons/month.png");
         view = monthView;
 
@@ -87,8 +87,8 @@ public class CalendarFrame extends JFrame {
 
 //        buildFrame();
         buildSidePanels();
-        setJMenuBar(menu);
-        addActionListenersToMenu();
+//        setJMenuBar(menu);
+//        addActionListenersToMenu();
     }
 
     public void buildFrame(CalendarStrategy calendarStrategy){
@@ -257,42 +257,6 @@ public class CalendarFrame extends JFrame {
         JLabel info = new JLabel(" Sania Runnfors Larsson");
         southPanel.add(info);
         contentPanel.add(southPanel, BorderLayout.SOUTH);
-    }
-
-    public void addActionListenersToMenu(){
-        //GUI.View Menu
-        menu.month.addActionListener(e -> {
-            view = monthView;
-            updateGUI();
-        });
-
-        menu.week.addActionListener(e -> {
-            view = weekView;
-            updateGUI();
-        });
-
-        menu.day.addActionListener(e -> {
-            view = dayView;
-            updateGUI();
-        });
-
-        //Color Menu
-        menu.grey.addActionListener(e -> {
-            colorSettings.setDefaultColorScheme();
-            updateGUI();
-        });
-        menu.green.addActionListener(e -> {
-            colorSettings.setGreenColorScheme();
-            updateGUI();
-        });
-        menu.pink.addActionListener(e -> {
-            colorSettings.setPinkColorScheme();
-            updateGUI();
-        });
-        menu.ugly.addActionListener(e -> {
-            colorSettings.setUglyColorScheme();
-            updateGUI();
-        });
     }
 
     public void updateGUI(){
