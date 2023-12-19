@@ -32,9 +32,9 @@ public class CalendarFacade {
 
     public void openCalendar(){
         calendarStrategy = monthView;
-        calendarFrame.buildFrame(calendarStrategy);
-        calendarFrame.updateGUI();
-        calendarFrame.setView(calendarStrategy);
+        calendarFrame.buildCalendar();
+//        calendarFrame.updateGUI();
+//        calendarFrame.setView(calendarStrategy);
     }
 
     public void monthView(){

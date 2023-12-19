@@ -117,6 +117,8 @@ public class CalendarFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("MyCalendar");
         setIconImage(icon.getImage());
+
+        setVisible(true);
     }
 
     public void setView(CalendarStrategy calendarStrategy){
