@@ -9,7 +9,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.time.LocalDate;
 
-public class DayView extends JPanel implements CalendarStrategy {
+public class DayView extends View {
 
     ColorSettings colorSettings;
     LocalDate date;

@@ -67,7 +67,7 @@ public class CalendarFrame extends JFrame {
         menu = new Menu();
         postFrame = new PostFrame(colorSettings, date);
         colorSettings = new ColorSettings();
-        contentPanel = new JPanel();
+        contentPanel = new JPanel(new BorderLayout());
         northPanel = new JPanel();
         //I want to use method Update GUI here it there is a call back
         monthView = new MonthView(colorSettings, date, this::panelClicked);
@@ -118,22 +118,18 @@ public class CalendarFrame extends JFrame {
         setTitle("MyCalendar");
         setIconImage(icon.getImage());
 
+        buildNorthPanel();
+        buildSouthPanel();
+        buildSidePanels();
+
+        add(contentPanel);
+
         setVisible(true);
     }
 
-    public void setView(CalendarStrategy calendarStrategy){
-        view = calendarStrategy;
-        if(view instanceof MonthView){
-            contentPanel.add(monthView, BorderLayout.CENTER);
-        }
-        else if(view instanceof WeekView){
-            contentPanel.add(weekView, BorderLayout.CENTER);
-        }
-        else if(view instanceof DayView){
-            contentPanel.add(dayView, BorderLayout.CENTER);
-        }
-        repaint();
-        revalidate();
+    public void setView(View view){
+        this.view = view;
+        contentPanel.add(view, BorderLayout.CENTER);
     }
 
     //TODO done

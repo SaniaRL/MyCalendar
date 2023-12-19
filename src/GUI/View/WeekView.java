@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
 
-public class WeekView extends JPanel implements CalendarStrategy {
+public class WeekView extends View {
 
     ColorSettings colorSettings;
     LocalDate date;

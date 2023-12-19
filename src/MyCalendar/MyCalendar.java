@@ -7,5 +7,7 @@ public class MyCalendar {
         CalendarFacade calendarFacade = new CalendarFacade();
         //Run Program
         calendarFacade.openCalendar();
+        //Set Month View
+        calendarFacade.monthView();
     }
 }

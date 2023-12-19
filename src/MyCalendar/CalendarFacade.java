@@ -2,10 +2,7 @@ package MyCalendar;
 
 import GUI.CalendarFrame.CalendarFrame;
 import GUI.ColorSettings;
-import GUI.View.CalendarStrategy;
-import GUI.View.DayView;
-import GUI.View.MonthView;
-import GUI.View.WeekView;
+import GUI.View.*;
 
 import java.time.LocalDate;
 
@@ -13,7 +10,7 @@ public class CalendarFacade {
 
     CalendarFrame calendarFrame;
 
-    CalendarStrategy calendarStrategy;
+    View view;
     MonthView monthView;
     WeekView weekView;
     DayView dayView;
@@ -31,13 +28,12 @@ public class CalendarFacade {
     }
 
     public void openCalendar(){
-        calendarStrategy = monthView;
         calendarFrame.buildCalendar();
-//        calendarFrame.updateGUI();
-//        calendarFrame.setView(calendarStrategy);
     }
 
     public void monthView(){
+        view = monthView;
+        calendarFrame.setView(view);
     }
 
     public void navigate(){

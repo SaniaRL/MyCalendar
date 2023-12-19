@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MonthView extends JPanel implements CalendarStrategy, MonthViewParent {
+public class MonthView extends View implements MonthViewParent {
 
     ColorSettings colorSettings;
     LocalDate date;
