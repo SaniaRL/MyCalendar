@@ -1,2 +1,2 @@
-Diary
-Memo
+Diary;;Persistence/Diary.txt;;170;;50;;250
+Memo;;Persistence/Memo.txt;;40;;120;;70

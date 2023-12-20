@@ -1,6 +1,8 @@
 package GUI.PostFrame;
 
+import GUI.CalendarEntry.CalendarEntry;
 import GUI.CalendarEntry.Category;
+import GUI.CalendarEntry.DiaryEntry;
 import GUI.ColorSettings;
 import FileManager.FileOperation;
 import FileManager.FileOperationType;
@@ -30,6 +32,8 @@ public class DayViewPanel extends EntryPanel implements DayViewPanelParent, File
 //    String regex;
     DayViewPanelParent parent;
 
+    List<CalendarEntry> calendarEntries;
+
     public DayViewPanel(ColorSettings colorSettings, LocalDate date, DayViewPanelParent dayViewPanelParent){
         super(colorSettings, date);
         parent = dayViewPanelParent;
@@ -43,6 +47,7 @@ public class DayViewPanel extends EntryPanel implements DayViewPanelParent, File
         //TODO Get by method from other class that holds the Categories
         categoryList = new ArrayList<>();
         categoryList.add(category);
+        calendarEntries = new ArrayList<>();
 //        regex = ";;";
 
         buildPanel();
@@ -99,22 +104,15 @@ public class DayViewPanel extends EntryPanel implements DayViewPanelParent, File
             categoryPaths.add(categoryTemp.getPath());
         }
 
-        try{
-            List<String> data = fileManager.getDataByDate(categoryPaths, date, regex, 0);
-            if(!data.isEmpty()){
-                for(String postData : data){
-                    String[] dataArray = postData.split(regex);
-                    JButton postButton = new JButton(dataArray[1]);
-                    postButton.setPreferredSize(new Dimension(50, 350));
-                    postButton.setBackground(category.getColor());
-                    centerPanel.add(postButton);
-                    centerPanel.revalidate();
+        List<String> data = fileManager.getDataByDate(categoryPaths, date, regex, 0);
+        if(!data.isEmpty()){
+            for(String postData : data){
+                String[] dataArray = postData.split(regex);
+                if(dataArray[1].trim().equalsIgnoreCase("diary")){
+                    calendarEntries.add(new DiaryEntry(date, dataArray[2], dataArray[3]));
                 }
             }
-        }catch (IOException e){
-            System.out.println("IOException");
         }
-
     }
 
     public void setColorSettings(ColorSettings colorSettings) {

@@ -1,10 +1,13 @@
 package GUI.View;
 
+import FileManager.FileManager;
+import FileManager.FileOperation;
 import GUI.ColorSettings;
 import GUI.DayOfMonth;
 import GUI.DayPanel.DayPanel;
 import GUI.DayPanel.DayPanelFactory;
 import GUI.DayPanel.Decorator.*;
+import GUI.PostFrame.EntryButton;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -15,7 +18,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MonthView extends View implements MonthViewParent {
+public class MonthView extends View implements MonthViewParent, FileOperation {
 
     ColorSettings colorSettings;
     LocalDate date;
@@ -23,6 +26,9 @@ public class MonthView extends View implements MonthViewParent {
     List<DayPanel> dayPanelList;
     DayPanel clickedPanel;
     DayPanelDecorator dayPanelDecorator;
+
+    //TODO Refactor/Remove later
+    List<String> paths = new ArrayList<>();
 
     public MonthView(ColorSettings colorSettings, LocalDate date, MonthViewParent monthViewParent){
         this.colorSettings = colorSettings;
@@ -34,6 +40,7 @@ public class MonthView extends View implements MonthViewParent {
         setBorder(new LineBorder(colorSettings.getBorderColor(), 2));
         createView();
         addActionListersToDays();
+        addEntryButtons();
     }
 
     public void createView(){
@@ -75,12 +82,28 @@ public class MonthView extends View implements MonthViewParent {
                 @Override
                 public void mousePressed(MouseEvent e) {
                     super.mousePressed(e);
-                    System.out.println(dayPanel.getDate());
+//                    System.out.println(dayPanel.getDate());
                     clickedPanel = dayPanel;
                     panelClicked();
                     updateClickedDay();
                 }
             });
+        }
+    }
+
+    public void addEntryButtons(){
+        paths.add("Persistence/Diary.txt");
+        for(DayPanel dayPanel : dayPanelList){
+            List<String> content = fileManager.getDataByDate(paths, dayPanel.getDate(), regex, 0);
+            for(String string : content){
+                String[] contentArray = string.split(regex);
+                System.out.println("Hej");
+                EntryButton entryButton = new EntryButton();
+                entryButton.setText(contentArray[2]);
+                dayPanel.add(entryButton);
+                dayPanel.repaint();
+                revalidate();
+            }
         }
     }
 

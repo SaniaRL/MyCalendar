@@ -17,10 +17,6 @@ public abstract class EntryPanel extends JPanel implements FileOperation {
         this.colorSettings = colorSettings;
         this.date = date;
     }
-    @Override
-    public void fileOperations(FileOperationType fileOperationType) {
-
-    }
 
     public abstract void fileOperation(FileOperationType fileOperationType);
 }

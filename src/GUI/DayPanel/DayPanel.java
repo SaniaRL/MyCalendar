@@ -46,6 +46,10 @@ public abstract class DayPanel extends JPanel implements DetailSetter {
         return date;
     }
 
+    public void addButton(JButton button){
+        add(button);
+    }
+
     @Override
     public void setDetails(){
         setBorder(border);
