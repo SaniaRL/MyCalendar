@@ -1,7 +1,7 @@
 package GUI.PostFrame;
 
 import GUI.ColorSettings;
-import GUI.FileOperationType;
+import FileManager.FileOperationType;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -9,10 +9,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class CreatePostPanel extends ReadEntryPanel {
-
-    ColorSettings colorSettings;
-    LocalDate date;
+public class CreatePostPanel extends EntryPanel {
 
     JPanel northPanel;
     JPanel centerPanel;
@@ -23,17 +20,14 @@ public class CreatePostPanel extends ReadEntryPanel {
     JButton save;
     JButton back;
 
-//    FileManager fileManager;
     String regex;
 
     public CreatePostPanel(ColorSettings colorSettings, LocalDate date){
-        this.colorSettings = colorSettings;
-        this.date = date;
+        super(colorSettings, date);
         northPanel = new JPanel(new GridLayout(1, 3));
         centerPanel = new JPanel();
-        textArea = new JTextArea(100, 1);
+        textArea = new JTextArea(100, 20);
         scrollPane = new JScrollPane(textArea);
-//        fileManager = FileManager.getInstance();
         regex = ";;";
 
         buildPanel();
@@ -56,6 +50,9 @@ public class CreatePostPanel extends ReadEntryPanel {
         northPanel.setBorder(new LineBorder(colorSettings.getBorderColor()));
 
         centerPanel.add(scrollPane);
+        textArea.setLineWrap(true);
+        textArea.setFont(new Font("Sans Serif", Font.PLAIN, 22));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setPreferredSize(new Dimension(380, 500));
 
         add(northPanel, BorderLayout.NORTH);
@@ -121,5 +118,10 @@ public class CreatePostPanel extends ReadEntryPanel {
             }
             case ACCESS -> System.out.println("ACCESS");
         }
+    }
+
+    @Override
+    public void fileOperation(FileOperationType fileOperationType) {
+        System.out.println("CreatePostPanel::fileOperation");
     }
 }

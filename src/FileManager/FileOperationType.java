@@ -1,4 +1,4 @@
-package GUI;
+package FileManager;
 
 public enum FileOperationType {
     READ,

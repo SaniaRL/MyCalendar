@@ -57,5 +57,47 @@ public class Menu extends JMenuBar {
         menu.add(colorMenu);
     }
 
+    public JMenu getMenu() {
+        return menu;
+    }
 
+    public JMenu getColorMenu() {
+        return colorMenu;
+    }
+
+    public JMenuItem getGrey() {
+        return grey;
+    }
+
+    public JMenuItem getGreen() {
+        return green;
+    }
+
+    public JMenuItem getPink() {
+        return pink;
+    }
+
+    public JMenuItem getUgly() {
+        return ugly;
+    }
+
+    public JMenu getView() {
+        return view;
+    }
+
+    public JMenuItem getMonth() {
+        return month;
+    }
+
+    public JMenuItem getWeek() {
+        return week;
+    }
+
+    public JMenuItem getDay() {
+        return day;
+    }
+
+    public JMenuItem getLogOut() {
+        return logOut;
+    }
 }

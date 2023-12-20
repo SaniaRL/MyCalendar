@@ -1,7 +1,6 @@
 package GUI.PostFrame;
 
 import GUI.ColorSettings;
-
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
@@ -12,7 +11,10 @@ public class PostFrame extends JFrame {
     ImageIcon icon;
 
     JPanel contentPanel;
+    DayViewPanel dayViewPanel;
     CreatePostPanel createPostPanel;
+
+    CardLayout cardLayout;
 
     public PostFrame(ColorSettings colorSettings, LocalDate date){
         this.colorSettings = colorSettings;
@@ -20,7 +22,15 @@ public class PostFrame extends JFrame {
         icon = new ImageIcon("Icons/7.png");
         contentPanel = new JPanel(new BorderLayout());
 
+
+        dayViewPanel = new DayViewPanel(colorSettings, date, () -> {
+            cardLayout.show(contentPanel, "CreatePost");
+            contentPanel.repaint();
+            contentPanel.revalidate();
+        });
+
         createPostPanel = new CreatePostPanel(colorSettings, date);
+        cardLayout = new CardLayout();
     }
 
     public void buildFrame(){
@@ -31,14 +41,14 @@ public class PostFrame extends JFrame {
         setResizable(false);
 
         contentPanel.setVisible(true);
+        contentPanel.setBackground(colorSettings.getColor());
+
         createPostPanel.setVisible(true);
 
-        CardLayout cardLayout = new CardLayout();
         contentPanel.setLayout(cardLayout);
-
-        contentPanel.setBackground(colorSettings.getColor());
-        contentPanel.add(createPostPanel, "CreatePostPanel");
-        cardLayout.show(contentPanel, "CreatePostPanel");
+        contentPanel.add(dayViewPanel, "DayView");
+        contentPanel.add(createPostPanel, "CreatePost");
+        cardLayout.show(contentPanel, "DayView");
         contentPanel.repaint();
         contentPanel.revalidate();
 
@@ -49,5 +59,10 @@ public class PostFrame extends JFrame {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public void setColorSettings(ColorSettings colorSettings) {
+        this.colorSettings = colorSettings;
+        contentPanel.setBackground(colorSettings.getColor());
     }
 }

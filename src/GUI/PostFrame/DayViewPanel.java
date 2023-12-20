@@ -1,55 +1,57 @@
 package GUI.PostFrame;
 
+import GUI.CalendarEntry.Category;
 import GUI.ColorSettings;
-import GUI.FileManager;
+import FileManager.FileOperation;
+import FileManager.FileOperationType;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.time.LocalDate;
 
-public class DayViewPanel extends JPanel {
+public class DayViewPanel extends EntryPanel implements DayViewPanelParent, FileOperation {
 
-    ColorSettings colorSettings;
-    LocalDate date;
     ImageIcon icon;
 
-    JPanel contentPanel;
     JPanel northPanel;
     JPanel centerPanel;
-    JPanel southPanel;
     JLabel dayLabel;
     JLabel monthYearLabel;
     JButton newPost;
-    JTextArea textArea;
-    JScrollPane scrollPane;
 
-    JButton save;
-    JButton back;
-    JButton category;
+    List<Category> categoryList;
+    Category category;
 
-    FileManager fileManager;
+    //TODO make sure regex does not exist in different classes
+//    String regex;
+    DayViewPanelParent parent;
 
-    public DayViewPanel(ColorSettings colorSettings, LocalDate date){
-        this.colorSettings = colorSettings;
-        this.date = date;
+    public DayViewPanel(ColorSettings colorSettings, LocalDate date, DayViewPanelParent dayViewPanelParent){
+        super(colorSettings, date);
+        parent = dayViewPanelParent;
         icon = new ImageIcon("Icons/7.png");
-        contentPanel = new JPanel(new BorderLayout());
         northPanel = new JPanel(new GridLayout(1, 3));
         centerPanel = new JPanel();
         dayLabel = new JLabel("", SwingConstants.CENTER);
         monthYearLabel = new JLabel();
         newPost = new JButton("+");
-        textArea = new JTextArea(100, 1);
-        scrollPane = new JScrollPane(textArea);
-        fileManager = FileManager.getInstance();
+        category = new Category("Diary", "Diary.txt", new Color(175, 102, 250));
+        //TODO Get by method from other class that holds the Categories
+        categoryList = new ArrayList<>();
+        categoryList.add(category);
+//        regex = ";;";
+
+        buildPanel();
     }
 
     public void buildPanel(){
         setSize(new Dimension(400, 600));
-
-        contentPanel.setBackground(colorSettings.getColor());
-        add(contentPanel);
+        setLayout(new BorderLayout());
+        setBackground(colorSettings.getColor());
 
         buildNorthPanel();
         buildCenterPanel();
@@ -66,7 +68,7 @@ public class DayViewPanel extends JPanel {
         northPanel.add(newPost);
         northPanel.add(dayLabel);
         northPanel.add(monthYearLabel);
-        contentPanel.add(northPanel, BorderLayout.NORTH);
+        add(northPanel, BorderLayout.NORTH);
 
         newPost.setBackground(colorSettings.getTodayBackgroundColor());
         dayLabel.setText(date.getDayOfWeek().toString());
@@ -74,46 +76,49 @@ public class DayViewPanel extends JPanel {
     }
 
     public void buildCenterPanel(){
-        contentPanel.add(centerPanel, BorderLayout.CENTER);
-
-
+        add(centerPanel, BorderLayout.CENTER);
     }
 
-    public void buildSouthPanel(){
-        southPanel = new JPanel(new GridLayout(1, 2));
-        southPanel.setBackground(colorSettings.getWeekendBackgroundColor());
-        buildPostButtons();
-
-        save = new JButton("Save");
-        back = new JButton("Back");
-        category = new JButton("Category");
-
-        southPanel.add(save);
-        southPanel.add(back);
-        contentPanel.add(southPanel, BorderLayout.SOUTH);
-    }
-
-    public JButton buildOptionButtons(){
-        return new JButton();
-    }
-
-    public void buildPostButtons(){
+    public void buildPostButtons() throws IOException {
 
     }
 
     public void addActionListenerToButtons() {
-        newPost.addActionListener(e -> openTextArea());
+        newPost.addActionListener(e -> buttonClicked());
+    }
+
+    @Override
+    public void buttonClicked() {
+        parent.buttonClicked();
+    }
+
+    @Override
+    public void fileOperation(FileOperationType fileOperationType) {
+        List<String> categoryPaths = new ArrayList<>();
+        for(Category categoryTemp : categoryList){
+            categoryPaths.add(categoryTemp.getPath());
+        }
+
+        try{
+            List<String> data = fileManager.getDataByDate(categoryPaths, date, regex, 0);
+            if(!data.isEmpty()){
+                for(String postData : data){
+                    String[] dataArray = postData.split(regex);
+                    JButton postButton = new JButton(dataArray[1]);
+                    postButton.setPreferredSize(new Dimension(50, 350));
+                    postButton.setBackground(category.getColor());
+                    centerPanel.add(postButton);
+                    centerPanel.revalidate();
+                }
+            }
+        }catch (IOException e){
+            System.out.println("IOException");
+        }
 
     }
 
-    public void openTextArea(){
-        System.out.println("Open Text Area");
-        buildSouthPanel();
-
-        centerPanel.removeAll();
-        centerPanel.add(scrollPane);
-        scrollPane.setPreferredSize(new Dimension(380, 500));
-        centerPanel.repaint();
-        centerPanel.revalidate();
+    public void setColorSettings(ColorSettings colorSettings) {
+        this.colorSettings = colorSettings;
+        setBackground(colorSettings.getColor());
     }
 }

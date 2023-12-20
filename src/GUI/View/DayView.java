@@ -9,7 +9,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.time.LocalDate;
 
-public class DayView extends JPanel implements CalendarStrategy {
+public class DayView extends View {
 
     ColorSettings colorSettings;
     LocalDate date;
@@ -32,7 +32,7 @@ public class DayView extends JPanel implements CalendarStrategy {
 
         createView();
     }
-    @Override
+
     public void createView() {
         removeAll();
         setLayout(new BorderLayout());
@@ -44,11 +44,20 @@ public class DayView extends JPanel implements CalendarStrategy {
     }
 
     @Override
-    public void changeDetails() {
+    public void setDetails() {
         createView();
         repaint();
         revalidate();
-        System.out.println(date);
+    }
+
+    @Override
+    public void navigate(int i) {
+        date = date.plusDays(i);
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return date;
     }
 
     public void buildNorthPanel(){
