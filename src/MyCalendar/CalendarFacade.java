@@ -41,6 +41,7 @@ public class CalendarFacade {
         weekView = new WeekView(colorSettings, date);
         dayView = new DayView(colorSettings, date);
         menu = new Menu();
+        postFrame = new PostFrame(colorSettings, date);
     }
 
     public void openCalendar(){
@@ -73,20 +74,10 @@ public class CalendarFacade {
     }
 
     public void addActionListenersToMenu(){
-        //View Menu
-        menu.getMonth().addActionListener(e -> {
-            view = monthView;
-        });
+        menu.getMonth().addActionListener(e -> view = monthView);
+        menu.getWeek().addActionListener(e -> view = weekView);
+        menu.getDay().addActionListener(e -> view = dayView);
 
-        menu.getWeek().addActionListener(e -> {
-            view = weekView;
-        });
-
-        menu.getDay().addActionListener(e -> {
-            view = dayView;
-        });
-
-        //Color Menu
         menu.getGrey().addActionListener(e -> addActionListenersToColorMenu("Grey"));
         menu.getGreen().addActionListener(e -> addActionListenersToColorMenu("Green"));
         menu.getPink().addActionListener(e -> addActionListenersToColorMenu("Pink"));
@@ -94,18 +85,10 @@ public class CalendarFacade {
     }
 
     public void addActionListenersToColorMenu(String color){
-        if(color.equalsIgnoreCase("Grey")){
-            colorSettings.setDefaultColorScheme();
-        }
-        else if(color.equalsIgnoreCase("Green")){
-            colorSettings.setGreenColorScheme();
-        }
-        else if(color.equalsIgnoreCase("Pink")){
-            colorSettings.setPinkColorScheme();
-        }
-        else{
-            colorSettings.setUglyColorScheme();
-        }
+        if(color.equalsIgnoreCase("Grey")) colorSettings.setDefaultColorScheme();
+        else if(color.equalsIgnoreCase("Green")) colorSettings.setGreenColorScheme();
+        else if(color.equalsIgnoreCase("Pink")) colorSettings.setPinkColorScheme();
+        else colorSettings.setUglyColorScheme();
         changeColorSettings();
     }
 
