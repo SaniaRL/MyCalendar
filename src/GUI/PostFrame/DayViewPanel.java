@@ -27,7 +27,7 @@ public class DayViewPanel extends EntryPanel implements DayViewPanelParent, File
     Category category;
 
     //TODO make sure regex does not exist in different classes
-    String regex;
+//    String regex;
     DayViewPanelParent parent;
 
     public DayViewPanel(ColorSettings colorSettings, LocalDate date, DayViewPanelParent dayViewPanelParent){
@@ -43,7 +43,7 @@ public class DayViewPanel extends EntryPanel implements DayViewPanelParent, File
         //TODO Get by method from other class that holds the Categories
         categoryList = new ArrayList<>();
         categoryList.add(category);
-        regex = ";;";
+//        regex = ";;";
 
         buildPanel();
     }
@@ -80,21 +80,7 @@ public class DayViewPanel extends EntryPanel implements DayViewPanelParent, File
     }
 
     public void buildPostButtons() throws IOException {
-        List<String> categoryPaths = new ArrayList<>();
-        for(Category categoryTemp : categoryList){
-            categoryPaths.add(categoryTemp.getPath());
-        }
 
-        try{
-            List<String> data = fileManager.getDataByDate(categoryPaths, date, regex, 0);
-            if(!data.isEmpty()){
-                for(String postData : data){
-
-                }
-            }
-        }catch (IOException e){
-            System.out.println("IOException");
-        }
     }
 
     public void addActionListenerToButtons() {
@@ -108,6 +94,31 @@ public class DayViewPanel extends EntryPanel implements DayViewPanelParent, File
 
     @Override
     public void fileOperation(FileOperationType fileOperationType) {
+        List<String> categoryPaths = new ArrayList<>();
+        for(Category categoryTemp : categoryList){
+            categoryPaths.add(categoryTemp.getPath());
+        }
 
+        try{
+            List<String> data = fileManager.getDataByDate(categoryPaths, date, regex, 0);
+            if(!data.isEmpty()){
+                for(String postData : data){
+                    String[] dataArray = postData.split(regex);
+                    JButton postButton = new JButton(dataArray[1]);
+                    postButton.setPreferredSize(new Dimension(50, 350));
+                    postButton.setBackground(category.getColor());
+                    centerPanel.add(postButton);
+                    centerPanel.revalidate();
+                }
+            }
+        }catch (IOException e){
+            System.out.println("IOException");
+        }
+
+    }
+
+    public void setColorSettings(ColorSettings colorSettings) {
+        this.colorSettings = colorSettings;
+        setBackground(colorSettings.getColor());
     }
 }

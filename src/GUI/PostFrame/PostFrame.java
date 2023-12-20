@@ -41,7 +41,7 @@ public class PostFrame extends JFrame {
         setResizable(false);
 
         contentPanel.setVisible(true);
-//        contentPanel.setBackground(colorSettings.getColor());
+        contentPanel.setBackground(colorSettings.getColor());
 
         createPostPanel.setVisible(true);
 
@@ -61,4 +61,8 @@ public class PostFrame extends JFrame {
         this.date = date;
     }
 
+    public void setColorSettings(ColorSettings colorSettings) {
+        this.colorSettings = colorSettings;
+        contentPanel.setBackground(colorSettings.getColor());
+    }
 }

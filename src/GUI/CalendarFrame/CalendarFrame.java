@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
+//The messiest class of all classes ever
 public class CalendarFrame extends JFrame {
 
     //Panels
@@ -51,7 +52,6 @@ public class CalendarFrame extends JFrame {
         icon = new ImageIcon("Icons/month.png");
     }
 
-//TODO code for facade
     public void buildCalendar(){
         setSize(new Dimension(1000, 600));
         setLocationRelativeTo(null);
@@ -183,7 +183,7 @@ public class CalendarFrame extends JFrame {
 
     public void buildSouthPanel(){
         southPanel.setOpaque(false);
-        JLabel info = new JLabel(" Sania Runnfors Larsson");
+        JLabel info = new JLabel("Sania Runnfors Larsson");
         southPanel.add(info);
         contentPanel.add(southPanel, BorderLayout.SOUTH);
     }

@@ -57,6 +57,7 @@ public class CalendarFacade {
     public void monthView(){
         view = monthView;
         calendarFrame.setView(view);
+        calendarFrame.revalidate();
     }
 
     public void panelClicked() {
@@ -95,7 +96,9 @@ public class CalendarFacade {
     public void changeColorSettings(){
         calendarFrame.setColorSettings(colorSettings);
         view.setColorSettings(colorSettings);
-        calendarFrame.repaint();
         calendarFrame.revalidate();
+        postFrame.setColorSettings(colorSettings);
+        postFrame.repaint();
+        postFrame.revalidate();
     }
 }
